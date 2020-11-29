@@ -15,7 +15,7 @@ enum PhotoError: Error {
 class PhotoStore {
     
     let imageStore = ImageStore()
-    var photos = [Photo]()
+//    var photos = [Photo]()
     
     private let session: URLSession = {
         let config = URLSessionConfiguration.default

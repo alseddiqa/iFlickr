@@ -18,9 +18,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        let rootViewController = window!.rootViewController as! UINavigationController
-        let photosViewController = rootViewController.topViewController as! PhotosCollectionViewController
-        photosViewController.store = PhotoStore()
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+        let mainTabBarController = storyboard.instantiateViewController(identifier: "TabBarController")
+        window?.rootViewController = mainTabBarController
+       
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
