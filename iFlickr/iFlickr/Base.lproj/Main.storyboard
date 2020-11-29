@@ -82,6 +82,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Photos" image="photo.on.rectangle.angled" catalog="system" id="4P1-gk-y5d"/>
+                    <connections>
+                        <outlet property="photosCollectionView" destination="J3a-cG-1Wf" id="Ued-BJ-C3T"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zlM-3E-15p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
