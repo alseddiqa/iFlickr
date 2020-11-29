@@ -10,7 +10,7 @@ import UIKit
 class PhotosCollectionViewController: UIViewController {
 
     @IBOutlet var photosCollectionView: UICollectionView!
-    var photos = [Photo]()
+    var store: PhotoStore!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,8 +42,8 @@ extension PhotosCollectionViewController: UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(photos.count)
-        return photos.count
+        print(store.photos.count)
+        return store.photos.count
 
     }
 }
