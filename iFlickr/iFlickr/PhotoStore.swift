@@ -22,8 +22,9 @@ class PhotoStore {
         return URLSession(configuration: config)
     }()
     
-    func fetchInterestingPhotos(completion: @escaping (Result<[Photo], Error>) -> Void) {
-        let url = FlickrAPI.photosSearchURL
+    func fetchInterestingPhotos(lat: Double, lon: Double, completion: @escaping (Result<[Photo], Error>) -> Void) {
+        let flickerAPI = FlickrAPI(lat: lat, lon: lon)
+        let url = flickerAPI.photosSearchURL
         let request = URLRequest(url: url)
         let task = session.dataTask(with: request) {
             (data, response, error) in

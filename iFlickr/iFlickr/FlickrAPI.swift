@@ -27,14 +27,23 @@ struct FlickrPhotosResponse: Codable {
 
 struct FlickrAPI {
     
-    private static let baseURLString = "https://api.flickr.com/services/rest"
-    private static let apiKey = "a6d819499131071f158fd740860a5a88"
-    static var photosSearchURL: URL {
+    let baseURLString = "https://api.flickr.com/services/rest"
+    let apiKey = "a6d819499131071f158fd740860a5a88"
+
+    var lat = ""
+    var lon = ""
+    
+    var photosSearchURL: URL {
         return flickrURL(endPoint: .photosSearch,
                          parameters: ["extras": "url_z,date_taken"])
     }
     
-    private static func flickrURL(endPoint: EndPoint,
+    init(lat:Double, lon: Double) {
+        self.lat = String(lat)
+        self.lon = String(lon)
+    }
+    
+    func flickrURL(endPoint: EndPoint,
                                   parameters: [String:String]?) -> URL {
         var components = URLComponents(string: baseURLString)!
         var queryItems = [URLQueryItem]()
@@ -44,8 +53,8 @@ struct FlickrAPI {
             "format": "json",
             "nojsoncallback": "1",
             "api_key": apiKey,
-            "lat": "24.7136",
-            "lon": "46.6753"
+            "lat": lat,
+            "lon": lon
         ]
         
         for (key, value) in baseParams {

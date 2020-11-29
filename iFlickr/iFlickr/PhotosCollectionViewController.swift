@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import CoreLocation
 
 class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate {
 
     @IBOutlet var photosCollectionView: UICollectionView!
     var store: PhotoStore!
     let photoDataSource = PhotoDataSource()
+    
+    let locationManager = CLLocationManager()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +34,7 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
     }
     
     func fetchPhotosInUserLocation() {
-        store.fetchInterestingPhotos {
+        store.fetchInterestingPhotos(lat:24.7136 , lon: 46.6753) {
             (photosResult) in
             switch photosResult {
             case let .success(photos):
