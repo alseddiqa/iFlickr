@@ -33,7 +33,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         //shows a blue point on user location
         mapView.showsUserLocation = true
         
-        // Zoom in to the user location, after locating it
+        // zoom in the user exact location 
         mapView.setUserTrackingMode(.follow, animated: true)
     }
     
