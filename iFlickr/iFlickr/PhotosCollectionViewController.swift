@@ -132,6 +132,20 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
         return distanceInMeters
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "showSelectedPhoto":
+            if let selectedIndexPath =
+                photosCollectionView.indexPathsForSelectedItems?.first {
+                let photo = photoDataSource.photos[selectedIndexPath.row]
+                let destinationVC = segue.destination as! PhotoDetailViewController
+                destinationVC.photo = photo
+            }
+        default:
+            preconditionFailure("Unexpected segue identifier.")
+        }
+    }
+    
     /*
      // MARK: - Navigation
      

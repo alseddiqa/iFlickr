@@ -9,6 +9,22 @@ import UIKit
 
 class PhotoDetailViewController: UIViewController {
 
+    @IBOutlet var imgaeView: UIImageView!
+    @IBOutlet var imageTitleLabel: UILabel!
+    @IBOutlet var imageDateTakenLabel: UILabel!
+    
+    var photo: Photo!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        imgaeView.load(url: photo.remoteURL!)
+        imageTitleLabel.text = photo.title
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "MM-dd-yyyy HH:mm"
+        imageDateTakenLabel.text = dateFormatterGet.string(from: photo.dateTaken)
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

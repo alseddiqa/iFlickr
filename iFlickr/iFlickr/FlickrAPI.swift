@@ -14,19 +14,6 @@ enum EndPoint: String {
     case photoGeoLocation = "flickr.photos.geo.getLocation"
 }
 
-struct FlickrResponse: Codable {
-    let photosInfo: FlickrPhotosResponse
-    enum CodingKeys: String, CodingKey {
-        case photosInfo = "photos"
-    }
-}
-struct FlickrPhotosResponse: Codable {
-    let photos: [Photo]
-    enum CodingKeys: String, CodingKey {
-        case photos = "photo"
-    }
-}
-
 struct FlickrAPI {
     
     let baseURLString = "https://api.flickr.com/services/rest"

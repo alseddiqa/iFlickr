@@ -72,7 +72,7 @@
                                         <connections>
                                             <outlet property="imageView" destination="bpQ-r6-KWG" id="ie4-U1-TWg"/>
                                             <outlet property="spinner" destination="DCa-HM-Afp" id="wh2-i3-paT"/>
-                                            <segue destination="uda-Jr-8N1" kind="show" id="KMM-AC-nGF"/>
+                                            <segue destination="uda-Jr-8N1" kind="show" identifier="showSelectedPhoto" id="KMM-AC-nGF"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -96,23 +96,50 @@
             </objects>
             <point key="canvasLocation" x="2163.768115942029" y="427.90178571428572"/>
         </scene>
-        <!--View Controller-->
+        <!--Photo Detail View Controller-->
         <scene sceneID="IuX-dJ-BD8">
             <objects>
-                <viewController id="uda-Jr-8N1" sceneMemberID="viewController">
+                <viewController id="uda-Jr-8N1" customClass="PhotoDetailViewController" customModule="iFlickr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wdi-j8-FCK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EHW-Hw-peE">
-                                <rect key="frame" x="0.0" y="88" width="414" height="353"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="ETJ-dG-jh6">
+                                <rect key="frame" x="0.0" y="88" width="414" height="715"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EHW-Hw-peE">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="393"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Qo-nf-5xE">
+                                        <rect key="frame" x="0.0" y="423" width="414" height="226"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="erc-rr-ebX">
+                                        <rect key="frame" x="0.0" y="679" width="414" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="G7J-SH-VZL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ETJ-dG-jh6" firstAttribute="trailing" secondItem="G7J-SH-VZL" secondAttribute="trailing" id="Kvh-a5-GRe"/>
+                            <constraint firstItem="ETJ-dG-jh6" firstAttribute="top" secondItem="G7J-SH-VZL" secondAttribute="top" id="gCU-Ul-JEd"/>
+                            <constraint firstItem="G7J-SH-VZL" firstAttribute="bottom" secondItem="ETJ-dG-jh6" secondAttribute="bottom" constant="10" id="xNr-Qz-EgK"/>
+                            <constraint firstItem="ETJ-dG-jh6" firstAttribute="leading" secondItem="G7J-SH-VZL" secondAttribute="leading" id="ydo-GV-3c7"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wzi-Fy-nit"/>
+                    <connections>
+                        <outlet property="imageDateTakenLabel" destination="erc-rr-ebX" id="lUe-C5-S5w"/>
+                        <outlet property="imageTitleLabel" destination="4Qo-nf-5xE" id="tau-if-yBX"/>
+                        <outlet property="imgaeView" destination="EHW-Hw-peE" id="vOH-Pt-sLi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CWU-Sz-uOm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
