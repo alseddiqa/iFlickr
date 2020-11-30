@@ -6,23 +6,12 @@
 //
 
 import Foundation
+import CoreLocation
+
 
 enum EndPoint: String {
     case photosSearch = "flickr.photos.search"
-}
-
-struct FlickrResponse: Codable {
-    //let photos: FlickrPhotosResponse
-    let photosInfo: FlickrPhotosResponse
-    enum CodingKeys: String, CodingKey {
-        case photosInfo = "photos"
-    }
-}
-struct FlickrPhotosResponse: Codable {
-    let photos: [Photo]
-    enum CodingKeys: String, CodingKey {
-        case photos = "photo"
-    }
+    case photoGeoLocation = "flickr.photos.geo.getLocation"
 }
 
 struct FlickrAPI {
@@ -35,7 +24,7 @@ struct FlickrAPI {
     
     var photosSearchURL: URL {
         return flickrURL(endPoint: .photosSearch,
-                         parameters: ["extras": "url_z,date_taken"])
+                         parameters: ["extras": "url_z,date_taken,geo"])
     }
     
     init(lat:Double, lon: Double) {
@@ -54,7 +43,9 @@ struct FlickrAPI {
             "nojsoncallback": "1",
             "api_key": apiKey,
             "lat": lat,
-            "lon": lon
+            "lon": lon,
+            "radius": "15",
+            "has_geo": "1"
         ]
         
         for (key, value) in baseParams {
@@ -90,4 +81,38 @@ struct FlickrAPI {
         }
     }
     
+//    func getDistanceFromPhoto(photoID: String) -> Double {
+//
+//
+//        let url = URL(string: "https://www.flickr.com/services/rest/" + "?method=\(EndPoint.photoGeoLocation.rawValue)" + "&api_key=\(apiKey)"+"&photo_id=\(photoID)&format=json&nojsoncallback=1")!
+//
+////        print(url)
+//        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
+//
+//        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+//
+//        let task = session.dataTask(with: request) { (data, response, error) in
+//            // This will run when the network request returns
+//            if let error = error {
+//                print(error.localizedDescription)
+//            } else if let data = data {
+//
+//                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+//
+//                print(dataDictionary["photo"] as! [String:Any])
+//
+//
+//                let currentCordinates = CLLocation(latitude: 5.0, longitude: 5.0)
+//                let coordinate₁ = CLLocation(latitude: 5.0, longitude: 3.0)
+//
+//                //let distanceInMeters = coordinate₀.distance(from: coordinate₁)
+//
+//
+//            }
+//        }
+//        task.resume()
+//        return 0
+//    }
+    
 }
+

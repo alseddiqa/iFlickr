@@ -9,32 +9,54 @@ import UIKit
 import CoreLocation
 
 class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate {
-
+    
     @IBOutlet var photosCollectionView: UICollectionView!
     var store: PhotoStore!
     let photoDataSource = PhotoDataSource()
+    //let customDispatch = DispatchQueue(label: "com.iFlickr", qos: .background)
+    let queue = OperationQueue()
+
+    var locationManager: PhotoLocationService!
     
-    let locationManager = CLLocationManager()
-
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.store = PhotoStore()
-        self.fetchPhotosInUserLocation()
-       
-        // Do any additional setup after loading the view.
+        queue.maxConcurrentOperationCount = 1
+        queue.qualityOfService = .userInteractive
         
+        let operation1 = BlockOperation {
+            self.locationManager = PhotoLocationService()
+        }
+        
+        let operation2 = BlockOperation {
+            self.store = PhotoStore()
+            self.fetchPhotosInUserLocation()
+        }
+        
+        operation2.addDependency(operation1)
+        queue.addOperation(operation1)
+        queue.addOperation(operation2)
+        
+        queue.waitUntilAllOperationsAreFinished()
         self.photosCollectionView.delegate = self
         self.photosCollectionView.dataSource = self.photoDataSource
         
-//        OperationQueue.main.addOperation {
-//
-//        }
     }
     
     func fetchPhotosInUserLocation() {
-        store.fetchInterestingPhotos(lat:24.7136 , lon: 46.6753) {
+        
+        
+        let currentLat = locationManager.getLatitude()
+        let currentLon = locationManager.getLongitude()
+        print("----")
+        print(currentLat)
+        print(currentLon)
+        self.store.fetchPhotosForLocation(lat:currentLat , lon: currentLon) {
             (photosResult) in
             switch photosResult {
             case let .success(photos):
@@ -47,11 +69,14 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
             
             self.photosCollectionView.reloadSections(IndexSet(integer: 0))
         }
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         willDisplay cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
+        let flickrAPI = FlickrAPI(lat: 24.7136, lon: 46.6753)
         let photo = photoDataSource.photos[indexPath.row]
         // Download the image data, which could take some time
         store.fetchImage(for: photo) { (result) -> Void in
@@ -67,6 +92,10 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
             if let cell = self.photosCollectionView.cellForItem(at: photoIndexPath)
                 as? PhotoCell {
                 cell.update(displaying: image)
+                
+                
+                print(photo.latitude)
+                
             }
         }
     }
@@ -80,32 +109,53 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.itemSize = CGSize(width: finalItemLength , height: finalItemLength )
-
+        
         
         if itemWidth > itemLength {
             layout.scrollDirection = .horizontal
-
+            
         }else {
             layout.scrollDirection = .vertical
         }
         
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
-//        layout.scrollDirection = .horizontal
+        //        layout.scrollDirection = .horizontal
         
         photosCollectionView.collectionViewLayout = layout
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func getDistanceFromPhotoLocation(currentLocation: CLLocation, photoLocation: CLLocation) -> Double{
+        
+        let distanceInMeters = currentLocation.distance(from: photoLocation)
+        
+        return distanceInMeters
     }
-    */
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "showSelectedPhoto":
+            if let selectedIndexPath =
+                photosCollectionView.indexPathsForSelectedItems?.first {
+                let photo = photoDataSource.photos[selectedIndexPath.row]
+                let destinationVC = segue.destination as! PhotoDetailViewController
+                destinationVC.photo = photo
+            }
+        default:
+            preconditionFailure("Unexpected segue identifier.")
+        }
+    }
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 //extension PhotosCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {

@@ -13,14 +13,31 @@ class Photo: Codable {
     let remoteURL: URL?
     let photoID: String
     let dateTaken: Date
+    let latitude, longitude, accuracy: String
     
     enum CodingKeys: String, CodingKey {
         case title
         case remoteURL = "url_z"
         case photoID = "id"
         case dateTaken = "datetaken"
+        case latitude
+        case longitude
+        case accuracy
     }
     
+}
+
+struct FlickrResponse: Codable {
+    let photosInfo: FlickrPhotosResponse
+    enum CodingKeys: String, CodingKey {
+        case photosInfo = "photos"
+    }
+}
+struct FlickrPhotosResponse: Codable {
+    let photos: [Photo]
+    enum CodingKeys: String, CodingKey {
+        case photos = "photo"
+    }
 }
 
 extension Photo: Equatable {
