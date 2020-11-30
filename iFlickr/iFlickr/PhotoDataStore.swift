@@ -24,6 +24,4 @@ class PhotoDataSource: NSObject, UICollectionViewDataSource {
         return photos.count
 
     }
-    
-    
 }

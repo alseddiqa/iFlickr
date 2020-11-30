@@ -13,12 +13,16 @@ class Photo: Codable {
     let remoteURL: URL?
     let photoID: String
     let dateTaken: Date
+    let latitude, longitude, accuracy: String
     
     enum CodingKeys: String, CodingKey {
         case title
         case remoteURL = "url_z"
         case photoID = "id"
         case dateTaken = "datetaken"
+        case latitude
+        case longitude
+        case accuracy
     }
     
 }

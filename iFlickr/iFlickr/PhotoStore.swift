@@ -22,7 +22,7 @@ class PhotoStore {
         return URLSession(configuration: config)
     }()
     
-    func fetchInterestingPhotos(lat: Double, lon: Double, completion: @escaping (Result<[Photo], Error>) -> Void) {
+    func fetchPhotosForLocation(lat: Double, lon: Double, completion: @escaping (Result<[Photo], Error>) -> Void) {
         let flickerAPI = FlickrAPI(lat: lat, lon: lon)
         let url = flickerAPI.photosSearchURL
         let request = URLRequest(url: url)
@@ -64,7 +64,6 @@ class PhotoStore {
             (data, response, error) in
             
             let result = self.processImageRequest(data: data, error: error)
-            
             if case let .success(image) = result {
                 self.imageStore.setImage(image, forKey: photoKey)
             }
