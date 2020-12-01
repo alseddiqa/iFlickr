@@ -16,11 +16,12 @@ class PhotoDataSource: NSObject, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PhotoCell
         
         cell.update(displaying: nil)
+        cell.shadowDecorate()
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(photos.count)
+        //print(photos.count)
         return photos.count
 
     }

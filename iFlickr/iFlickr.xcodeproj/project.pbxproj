@@ -25,6 +25,7 @@
 		B8B52D7A257428DC00DBF3E2 /* PhotoDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B52D79257428DC00DBF3E2 /* PhotoDataStore.swift */; };
 		B8EE6F862574FB2600124B47 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EE6F852574FB2600124B47 /* PhotoDetailViewController.swift */; };
 		B8EE6F962575313A00124B47 /* PhotoLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EE6F952575313A00124B47 /* PhotoLocationService.swift */; };
+		B8EE6FA22576605A00124B47 /* PhotoOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EE6FA12576605A00124B47 /* PhotoOverlay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		B8B52D79257428DC00DBF3E2 /* PhotoDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDataStore.swift; sourceTree = "<group>"; };
 		B8EE6F852574FB2600124B47 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
 		B8EE6F952575313A00124B47 /* PhotoLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLocationService.swift; sourceTree = "<group>"; };
+		B8EE6FA12576605A00124B47 /* PhotoOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoOverlay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				B8B52CFD2573C5E600DBF3E2 /* AppDelegate.swift */,
 				B8B52CFF2573C5E600DBF3E2 /* SceneDelegate.swift */,
 				B8B52D012573C5E600DBF3E2 /* ViewController.swift */,
+				B8EE6FA12576605A00124B47 /* PhotoOverlay.swift */,
 				B8B52D032573C5E600DBF3E2 /* Main.storyboard */,
 				B8EE6F852574FB2600124B47 /* PhotoDetailViewController.swift */,
 				B8B52D6A2573FD5E00DBF3E2 /* FlickrAPI.swift */,
@@ -297,6 +300,7 @@
 				B8EE6F862574FB2600124B47 /* PhotoDetailViewController.swift in Sources */,
 				B8B52D002573C5E600DBF3E2 /* SceneDelegate.swift in Sources */,
 				B8B52D4C2573D58300DBF3E2 /* PhotosCollectionViewController.swift in Sources */,
+				B8EE6FA22576605A00124B47 /* PhotoOverlay.swift in Sources */,
 				B8B52D312573C6FA00DBF3E2 /* MapViewController.swift in Sources */,
 				B8B52D7A257428DC00DBF3E2 /* PhotoDataStore.swift in Sources */,
 				B8EE6F962575313A00124B47 /* PhotoLocationService.swift in Sources */,

@@ -11,7 +11,6 @@ import CoreLocation
 
 enum EndPoint: String {
     case photosSearch = "flickr.photos.search"
-    case photoGeoLocation = "flickr.photos.geo.getLocation"
 }
 
 struct FlickrAPI {
@@ -19,8 +18,8 @@ struct FlickrAPI {
     let baseURLString = "https://api.flickr.com/services/rest"
     let apiKey = "a6d819499131071f158fd740860a5a88"
 
-    var lat = ""
-    var lon = ""
+    var latitude = ""
+    var longitude = ""
     
     var photosSearchURL: URL {
         return flickrURL(endPoint: .photosSearch,
@@ -28,8 +27,8 @@ struct FlickrAPI {
     }
     
     init(lat:Double, lon: Double) {
-        self.lat = String(lat)
-        self.lon = String(lon)
+        self.latitude = String(lat)
+        self.longitude = String(lon)
     }
     
     func flickrURL(endPoint: EndPoint,
@@ -42,9 +41,9 @@ struct FlickrAPI {
             "format": "json",
             "nojsoncallback": "1",
             "api_key": apiKey,
-            "lat": lat,
-            "lon": lon,
-            "radius": "15",
+            "lat": latitude,
+            "lon": longitude,
+            "radius": "10",
             "has_geo": "1"
         ]
         
