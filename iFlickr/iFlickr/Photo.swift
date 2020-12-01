@@ -14,6 +14,7 @@ class Photo: Codable {
     let photoID: String
     let dateTaken: Date
     let latitude, longitude, accuracy: String
+    let views: String
     
     enum CodingKeys: String, CodingKey {
         case title
@@ -23,6 +24,7 @@ class Photo: Codable {
         case latitude
         case longitude
         case accuracy
+        case views
     }
     
 }

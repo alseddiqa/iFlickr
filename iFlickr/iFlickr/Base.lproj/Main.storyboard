@@ -124,14 +124,20 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="393"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Qo-nf-5xE">
-                                        <rect key="frame" x="0.0" y="423" width="414" height="226"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <rect key="frame" x="0.0" y="423" width="414" height="184"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="views" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dS8-hf-mJ6">
+                                        <rect key="frame" x="0.0" y="637" width="414" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="erc-rr-ebX">
-                                        <rect key="frame" x="0.0" y="679" width="414" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <rect key="frame" x="0.0" y="691" width="414" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -152,6 +158,7 @@
                         <outlet property="imageDateTakenLabel" destination="erc-rr-ebX" id="lUe-C5-S5w"/>
                         <outlet property="imageTitleLabel" destination="4Qo-nf-5xE" id="tau-if-yBX"/>
                         <outlet property="imgaeView" destination="EHW-Hw-peE" id="vOH-Pt-sLi"/>
+                        <outlet property="numOfViewsLabel" destination="dS8-hf-mJ6" id="t2Y-y3-RyI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CWU-Sz-uOm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

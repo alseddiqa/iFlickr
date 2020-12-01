@@ -13,13 +13,10 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
     @IBOutlet var photosCollectionView: UICollectionView!
     var store: PhotoStore!
     let photoDataSource = PhotoDataSource()
-    
     var locationManager: PhotoLocationService!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        
     }
     
     override func viewDidLoad() {
@@ -53,10 +50,7 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
         
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        willDisplay cell: UICollectionViewCell,
-                        forItemAt indexPath: IndexPath) {
-        let flickrAPI = FlickrAPI(lat: 24.7136, lon: 46.6753)
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let photo = photoDataSource.photos[indexPath.row]
         // Download the image data, which could take some time
         store.fetchImage(for: photo) { (result) -> Void in
@@ -113,7 +107,6 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
         let distanceInMeters = currentLocation.distance(from: photoLocation)/1000
                 
         return Int(distanceInMeters)
-
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -146,9 +139,6 @@ extension PhotosCollectionViewController: LocationServiceDelegate {
     func tracingLocation(currentLocation: CLLocation) {
         self.store = PhotoStore()
         self.fetchPhotosInUserLocation(lat: currentLocation.coordinate.latitude, lon: currentLocation.coordinate.longitude)
-        
-        print("------aaa")
-        print(currentLocation.coordinate.latitude)
     }
 }
 
@@ -163,11 +153,5 @@ extension UIImageView {
                 }
             }
         }
-    }
-}
-
-extension CLLocationDistance {
-    func inKilometers() -> CLLocationDistance {
-        return self/1000
     }
 }

@@ -23,7 +23,7 @@ struct FlickrAPI {
     
     var photosSearchURL: URL {
         return flickrURL(endPoint: .photosSearch,
-                         parameters: ["extras": "url_z,date_taken,geo"])
+                         parameters: ["extras": "url_z,date_taken,geo,views"])
     }
     
     init(lat:Double, lon: Double) {
