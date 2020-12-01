@@ -12,6 +12,7 @@ class PhotoDetailViewController: UIViewController {
     @IBOutlet var imgaeView: UIImageView!
     @IBOutlet var imageTitleLabel: UILabel!
     @IBOutlet var imageDateTakenLabel: UILabel!
+    @IBOutlet var numOfViewsLabel: UILabel!
     
     var photo: Photo!
     
@@ -19,6 +20,7 @@ class PhotoDetailViewController: UIViewController {
         super.viewWillAppear(true)
         imgaeView.load(url: photo.remoteURL!)
         imageTitleLabel.text = photo.title
+        numOfViewsLabel.text = photo.views + "views 👁️‍🗨️"
         
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "MM-dd-yyyy HH:mm"

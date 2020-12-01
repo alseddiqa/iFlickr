@@ -37,15 +37,15 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="J3a-cG-1Wf">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="1Ec-qW-emT">
-                                    <size key="itemSize" width="100" height="100"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="1Ec-qW-emT">
+                                    <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="2" minY="2" maxX="2" maxY="2"/>
+                                    <inset key="sectionInset" minX="1" minY="1" maxX="1" maxY="1"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCollectionViewCell" id="XWk-Pt-wRU" customClass="PhotoCell" customModule="iFlickr" customModuleProvider="target">
-                                        <rect key="frame" x="2" y="2" width="100" height="100"/>
+                                        <rect key="frame" x="1" y="1" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="bu7-dm-ePp">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
@@ -55,9 +55,16 @@
                                                     <rect key="frame" x="31.5" y="31.5" width="37" height="37"/>
                                                     <color key="color" systemColor="systemPinkColor"/>
                                                 </activityIndicatorView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bpQ-r6-KWG">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bpQ-r6-KWG">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 km" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZlQ-P8-wGR">
+                                                    <rect key="frame" x="0.0" y="79" width="100" height="21"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" systemColor="systemOrangeColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="DCa-HM-Afp" firstAttribute="centerX" secondItem="bu7-dm-ePp" secondAttribute="centerX" id="9vk-ec-AVj"/>
@@ -65,11 +72,17 @@
                                                 <constraint firstAttribute="trailing" secondItem="bpQ-r6-KWG" secondAttribute="trailing" id="ENc-Xm-KcC"/>
                                                 <constraint firstItem="bpQ-r6-KWG" firstAttribute="leading" secondItem="bu7-dm-ePp" secondAttribute="leading" id="Ezv-sC-dXy"/>
                                                 <constraint firstItem="bpQ-r6-KWG" firstAttribute="top" secondItem="bu7-dm-ePp" secondAttribute="top" id="IhL-FS-vHg"/>
+                                                <constraint firstItem="ZlQ-P8-wGR" firstAttribute="leading" secondItem="bu7-dm-ePp" secondAttribute="leading" id="PSA-CJ-GGE"/>
+                                                <constraint firstAttribute="bottom" secondItem="ZlQ-P8-wGR" secondAttribute="bottom" id="W0n-Wp-dhb"/>
                                                 <constraint firstItem="DCa-HM-Afp" firstAttribute="centerY" secondItem="bu7-dm-ePp" secondAttribute="centerY" id="WGd-9o-mVF"/>
+                                                <constraint firstAttribute="trailing" secondItem="ZlQ-P8-wGR" secondAttribute="trailing" id="d1y-Mt-9mu"/>
+                                                <constraint firstItem="bpQ-r6-KWG" firstAttribute="centerY" secondItem="bu7-dm-ePp" secondAttribute="centerY" id="kjU-P0-oa7"/>
+                                                <constraint firstItem="bpQ-r6-KWG" firstAttribute="centerX" secondItem="bu7-dm-ePp" secondAttribute="centerX" id="s2f-GE-pp1"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="100" height="100"/>
                                         <connections>
+                                            <outlet property="distance" destination="ZlQ-P8-wGR" id="Ab1-0h-1bV"/>
                                             <outlet property="imageView" destination="bpQ-r6-KWG" id="ie4-U1-TWg"/>
                                             <outlet property="spinner" destination="DCa-HM-Afp" id="wh2-i3-paT"/>
                                             <segue destination="uda-Jr-8N1" kind="show" identifier="showSelectedPhoto" id="KMM-AC-nGF"/>
@@ -111,14 +124,20 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="393"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Qo-nf-5xE">
-                                        <rect key="frame" x="0.0" y="423" width="414" height="226"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <rect key="frame" x="0.0" y="423" width="414" height="184"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="views" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dS8-hf-mJ6">
+                                        <rect key="frame" x="0.0" y="637" width="414" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="erc-rr-ebX">
-                                        <rect key="frame" x="0.0" y="679" width="414" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <rect key="frame" x="0.0" y="691" width="414" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -139,6 +158,7 @@
                         <outlet property="imageDateTakenLabel" destination="erc-rr-ebX" id="lUe-C5-S5w"/>
                         <outlet property="imageTitleLabel" destination="4Qo-nf-5xE" id="tau-if-yBX"/>
                         <outlet property="imgaeView" destination="EHW-Hw-peE" id="vOH-Pt-sLi"/>
+                        <outlet property="numOfViewsLabel" destination="dS8-hf-mJ6" id="t2Y-y3-RyI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CWU-Sz-uOm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -189,6 +209,9 @@
         <image name="photo.on.rectangle.angled" catalog="system" width="128" height="101"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

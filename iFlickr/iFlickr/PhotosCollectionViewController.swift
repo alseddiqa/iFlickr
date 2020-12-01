@@ -13,57 +13,34 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
     @IBOutlet var photosCollectionView: UICollectionView!
     var store: PhotoStore!
     let photoDataSource = PhotoDataSource()
-    //let customDispatch = DispatchQueue(label: "com.iFlickr", qos: .background)
-    let queue = OperationQueue()
-
     var locationManager: PhotoLocationService!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        queue.maxConcurrentOperationCount = 1
-        queue.qualityOfService = .userInteractive
         
-        let operation1 = BlockOperation {
-            self.locationManager = PhotoLocationService()
-        }
+        self.locationManager = PhotoLocationService()
+        locationManager.delegate = self
         
-        let operation2 = BlockOperation {
-            self.store = PhotoStore()
-            self.fetchPhotosInUserLocation()
-        }
-        
-        operation2.addDependency(operation1)
-        queue.addOperation(operation1)
-        queue.addOperation(operation2)
-        
-        queue.waitUntilAllOperationsAreFinished()
         self.photosCollectionView.delegate = self
         self.photosCollectionView.dataSource = self.photoDataSource
         
     }
     
-    func fetchPhotosInUserLocation() {
+    func fetchPhotosInUserLocation(lat: Double, lon: Double) {
         
-        
-        let currentLat = locationManager.getLatitude()
-        let currentLon = locationManager.getLongitude()
         print("----")
-        print(currentLat)
-        print(currentLon)
-        self.store.fetchPhotosForLocation(lat:currentLat , lon: currentLon) {
+        self.store.fetchPhotosForLocation(lat:lat , lon: lon) {
             (photosResult) in
             switch photosResult {
             case let .success(photos):
-                print("Successfully found \(photos.count) photos.")
+                print("Found \(photos.count) photos.")
                 self.photoDataSource.photos = photos
             case let .failure(error):
-                print("Error fetching interesting photos: \(error)")
+                print("Error fetching photos: \(error)")
                 self.photoDataSource.photos.removeAll()
             }
             
@@ -73,10 +50,7 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
         
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        willDisplay cell: UICollectionViewCell,
-                        forItemAt indexPath: IndexPath) {
-        let flickrAPI = FlickrAPI(lat: 24.7136, lon: 46.6753)
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let photo = photoDataSource.photos[indexPath.row]
         // Download the image data, which could take some time
         store.fetchImage(for: photo) { (result) -> Void in
@@ -93,22 +67,25 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
                 as? PhotoCell {
                 cell.update(displaying: image)
                 
-                
-                print(photo.latitude)
+                let photoLocation = CLLocation(latitude: Double(photo.latitude)!, longitude:  Double(photo.longitude)!)
+                let distance = self.getDistanceFromPhotoLocation(currentLocation: self.locationManager.lastLocation!, photoLocation: photoLocation)
+                cell.distance.text = "\(distance)km"
                 
             }
         }
     }
     
     override func viewDidLayoutSubviews() {
-        let itemWidth = view.safeAreaLayoutGuide.layoutFrame.size.width / 4
-        let itemLength = view.safeAreaLayoutGuide.layoutFrame.size.height / 4
+        let itemWidth = view.safeAreaLayoutGuide.layoutFrame.size.width / 3
+        let itemLength = view.safeAreaLayoutGuide.layoutFrame.size.height / 3
+        print("------")
+        print(itemWidth)
         
         let finalItemLength = floor(min(itemWidth, itemLength))
         
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.itemSize = CGSize(width: finalItemLength , height: finalItemLength )
+        layout.itemSize = CGSize(width: finalItemLength - 10 , height: finalItemLength - 10)
         
         
         if itemWidth > itemLength {
@@ -118,18 +95,18 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
             layout.scrollDirection = .vertical
         }
         
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
+//        layout.minimumInteritemSpacing = 0
+//        layout.minimumLineSpacing = 0
         //        layout.scrollDirection = .horizontal
         
         photosCollectionView.collectionViewLayout = layout
     }
     
-    func getDistanceFromPhotoLocation(currentLocation: CLLocation, photoLocation: CLLocation) -> Double{
+    func getDistanceFromPhotoLocation(currentLocation: CLLocation, photoLocation: CLLocation) -> Int{
         
-        let distanceInMeters = currentLocation.distance(from: photoLocation)
-        
-        return distanceInMeters
+        let distanceInMeters = currentLocation.distance(from: photoLocation)/1000
+                
+        return Int(distanceInMeters)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -158,24 +135,12 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
     
 }
 
-//extension PhotosCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let identifier = "PhotoCollectionViewCell"
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PhotoCell
-//
-////        let photo = store.photos[indexPath.item]
-////        cell.imageView.load(url: photo.remoteURL!)
-//        cell.update(displaying: nil)
-//        return cell
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        print(store.photos.count)
-//        return store.photos.count
-//
-//    }
-//}
+extension PhotosCollectionViewController: LocationServiceDelegate {
+    func tracingLocation(currentLocation: CLLocation) {
+        self.store = PhotoStore()
+        self.fetchPhotosInUserLocation(lat: currentLocation.coordinate.latitude, lon: currentLocation.coordinate.longitude)
+    }
+}
 
 extension UIImageView {
     func load(url: URL) {

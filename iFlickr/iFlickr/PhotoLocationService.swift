@@ -8,10 +8,17 @@
 import Foundation
 import CoreLocation
 
+protocol LocationServiceDelegate {
+    func tracingLocation(currentLocation: CLLocation)
+}
+
 class PhotoLocationService: NSObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
-    private var latitude = 0.0
-    private var longitude = 0.0
+    private(set) var latitude = 0.0
+    private(set) var longitude = 0.0
+    
+    var lastLocation: CLLocation?
+    var delegate: LocationServiceDelegate?
     
     
     override init() {
@@ -21,6 +28,7 @@ class PhotoLocationService: NSObject, CLLocationManagerDelegate {
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.requestAlwaysAuthorization() // you might replace this with whenInuse
         locationManager.startUpdatingLocation()
+        //sleep(10)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -29,14 +37,37 @@ class PhotoLocationService: NSObject, CLLocationManagerDelegate {
             longitude = location.coordinate.longitude
             print("-----mang")
             print(latitude)
+            
+            self.lastLocation = location
+                    
+                    // use for real time update location
+            updateLocation(currentLocation: location)
         }
     }
     
-     func getLatitude() -> CLLocationDegrees {
-        return latitude
+    func startUpdatingLocation() {
+            print("Starting Location Updates")
+            self.locationManager.startUpdatingLocation()
     }
     
-     func getLongitude() -> CLLocationDegrees {
-        return longitude
-    }
+    private func updateLocation(currentLocation: CLLocation){
+
+          guard let delegate = self.delegate else {
+              return
+          }
+          
+        delegate.tracingLocation(currentLocation: currentLocation)
+}
+    
+//     func getLatitude() -> CLLocationDegrees {
+//        return latitude
+//    }
+//    
+//     func getLongitude() -> CLLocationDegrees {
+//        return longitude
+//    }
+    
+    //notification -> Multiple listeners
+    //delegate -> single listener
+    //completion handler pat -> Single listener (more modern)
 }
