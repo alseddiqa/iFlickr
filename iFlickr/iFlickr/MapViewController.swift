@@ -10,16 +10,19 @@ import MapKit
 import CoreLocation
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
-
+    
     let locationManager = CLLocationManager()
+    var annotitionsCounter = 0
     
     @IBOutlet var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+        
         setUpMapView()
         getUserLocation()
+        //markPhotosOnMap()
     }
     
     func getUserLocation() {
@@ -49,9 +52,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let standardString = NSLocalizedString("Standard", comment: "Standard map view")
         let hybridString = NSLocalizedString("Hybrid", comment: "Hybrid map view")
         let satelliteString
-        = NSLocalizedString("Satellite", comment: "Satellite map view")
+            = NSLocalizedString("Satellite", comment: "Satellite map view")
         let segmentedControl
-        = UISegmentedControl(items: [standardString, hybridString, satelliteString])
+            = UISegmentedControl(items: [standardString, hybridString, satelliteString])
         segmentedControl.backgroundColor = UIColor.systemBackground
         segmentedControl.selectedSegmentIndex = 0
         
@@ -68,8 +71,54 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         topConstraint.isActive = true
         leadingConstraint.isActive = true
         trailingConstraint.isActive = true
+        
+        
     }
-
+    
+    @IBAction func triggerTouchAction(_ sender: UITapGestureRecognizer){
+        if sender.state == .ended{
+            let locationInView = sender.location(in: mapView)
+            let tappedCoordinate = mapView.convert(locationInView, toCoordinateFrom: mapView)
+            if annotitionsCounter == 1 {
+                mapView.removeAnnotations(mapView.annotations)
+                annotitionsCounter = 0
+                addAnnotation(coordinate: tappedCoordinate)
+            }
+            else {
+                mapView.removeAnnotations(mapView.annotations)
+                addAnnotation(coordinate: tappedCoordinate)
+                annotitionsCounter+=1
+            }
+        }
+    }
+    
+    func addAnnotation(coordinate:CLLocationCoordinate2D){
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        mapView.addAnnotation(annotation)
+        showPinnedLocationPhotos()
+    }
+    
+    func showPinnedLocationPhotos()
+    {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let destVC = storyboard.instantiateViewController(withIdentifier: "PinnedController") as! PinnedLocationViewController
+        
+        destVC.modalPresentationStyle = UIModalPresentationStyle.popover
+        destVC.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+        destVC.delegate = self
+        self.present(destVC, animated: true, completion: nil)
+    }
+    
+    func markPhotosOnMap() {
+        mapView.delegate = self
+        let appleParkAnnotation = MKPointAnnotation()
+        appleParkAnnotation.title = "Apple Park"
+        appleParkAnnotation.coordinate = CLLocationCoordinate2DMake(26.399250, 49.984360)
+        
+        mapView.addAnnotation(appleParkAnnotation)
+    }
+    
     @objc func mapTypeChanged(_ segControl: UISegmentedControl) {
         switch segControl.selectedSegmentIndex {
         case 0:
@@ -83,13 +132,60 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
+
+extension MapViewController: MKMapViewDelegate  {
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        
+        let imageUrlString = "http://cdn.playbuzz.com/cdn/38402fff-32a3-4e78-a532-41f3a54d04b9/cc513a85-8765-48a5-8481-98740cc6ccdc.jpg"
+        
+        let imageUrl = URL(string: imageUrlString)!
+        
+        let image = try? UIImage(withContentsOfUrl: imageUrl)
+        
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "AnnotationView")
+        
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "AnnotationView")
+        }
+        
+        if let title = annotation.title, title == "Apple Park" {
+            annotationView?.image = image
+            print("------")
+        } else if let title = annotation.title, title == "Ortega Park" {
+            annotationView?.image = UIImage(named: "tree")
+        } else if annotation === mapView.userLocation {
+            annotationView?.image = UIImage(named: "car")
+        }
+        
+        annotationView?.canShowCallout = true
+        
+        return annotationView
+        
+    }
+    
+}
+
+//class CustomPointAnnotation: MKPointAnnotation {
+//    var imageName: String!
+//}
+
+extension UIImage {
+    
+    convenience init?(withContentsOfUrl url: URL) throws {
+        let imageData = try Data(contentsOf: url)
+        
+        self.init(data: imageData)
+    }
+    
+}
+
