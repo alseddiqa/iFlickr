@@ -15,6 +15,8 @@
 		B83C975D25794F3200B7C4E7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83C975C25794F3200B7C4E7 /* LoginViewController.swift */; };
 		B88872CF2579532E008EBA04 /* SignUpDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88872CE2579532E008EBA04 /* SignUpDelegate.swift */; };
 		B88872D425795727008EBA04 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88872D325795727008EBA04 /* SettingsViewController.swift */; };
+		B88872DD25795E47008EBA04 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88872DC25795E47008EBA04 /* UserViewController.swift */; };
+		B88872E225795E70008EBA04 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88872E125795E70008EBA04 /* User.swift */; };
 		B8B52CFE2573C5E600DBF3E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B52CFD2573C5E600DBF3E2 /* AppDelegate.swift */; };
 		B8B52D002573C5E600DBF3E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B52CFF2573C5E600DBF3E2 /* SceneDelegate.swift */; };
 		B8B52D022573C5E600DBF3E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B52D012573C5E600DBF3E2 /* ViewController.swift */; };
@@ -69,6 +71,8 @@
 		B83C975C25794F3200B7C4E7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B88872CE2579532E008EBA04 /* SignUpDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDelegate.swift; sourceTree = "<group>"; };
 		B88872D325795727008EBA04 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		B88872DC25795E47008EBA04 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		B88872E125795E70008EBA04 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B8B52CFA2573C5E600DBF3E2 /* iFlickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iFlickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B52CFD2573C5E600DBF3E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8B52CFF2573C5E600DBF3E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -207,6 +211,8 @@
 				B8B52D012573C5E600DBF3E2 /* ViewController.swift */,
 				B8EE6FA12576605A00124B47 /* PhotoOverlay.swift */,
 				B8B52D032573C5E600DBF3E2 /* Main.storyboard */,
+				B88872DC25795E47008EBA04 /* UserViewController.swift */,
+				B88872E125795E70008EBA04 /* User.swift */,
 				B88872D825795730008EBA04 /* Settings */,
 				B88872CA25795310008EBA04 /* User Authentication */,
 				B83C973F25792B0000B7C4E7 /* User Registeration */,
@@ -491,6 +497,7 @@
 				B8DAC80A257825FD0007B880 /* PhotosTableDataSource.swift in Sources */,
 				B83C973B25792AF300B7C4E7 /* RegisterationViewController.swift in Sources */,
 				B88872D425795727008EBA04 /* SettingsViewController.swift in Sources */,
+				B88872DD25795E47008EBA04 /* UserViewController.swift in Sources */,
 				B8DAC805257816F30007B880 /* PhotoTableViewCell.swift in Sources */,
 				B8B52D662573F8BF00DBF3E2 /* PhotoCell.swift in Sources */,
 				B88872CF2579532E008EBA04 /* SignUpDelegate.swift in Sources */,
@@ -509,6 +516,7 @@
 				B8B52D7A257428DC00DBF3E2 /* PhotoDataStore.swift in Sources */,
 				B8EE6F962575313A00124B47 /* PhotoLocationService.swift in Sources */,
 				B8B52D6B2573FD5E00DBF3E2 /* FlickrAPI.swift in Sources */,
+				B88872E225795E70008EBA04 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
