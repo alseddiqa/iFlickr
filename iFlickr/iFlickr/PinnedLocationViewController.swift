@@ -43,11 +43,11 @@ class PinnedLocationViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        print(photos.count)
-        return photos.count
-    }
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        // #warning Incomplete implementation, return the number of rows
+//        print(photos.count)
+//        return photos.count
+//    }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let photo = photosDataSource.photos[indexPath.row]
@@ -71,16 +71,16 @@ class PinnedLocationViewController: UITableViewController {
     }
 
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoTableCell", for: indexPath) as! PhotoTableViewCell
-        let photo = photos[indexPath.row]
-        print(photo.title)
-
-        cell.photoTitleLabel.text = photo.title
-        cell.imageView?.load(url: photo.remoteURL!)
-
-        return cell
-    }
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoTableCell", for: indexPath) as! PhotoTableViewCell
+//        let photo = photos[indexPath.row]
+//        print(photo.title)
+//
+//        cell.photoTitleLabel.text = photo.title
+//        cell.imageView?.load(url: photo.remoteURL!)
+//
+//        return cell
+//    }
     
 
     /*

@@ -13,13 +13,12 @@
         <scene sceneID="hTT-hB-Z73">
             <objects>
                 <tableViewController storyboardIdentifier="PinnedController" id="JVF-vg-iMj" customClass="PinnedLocationViewController" customModule="iFlickr" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="250" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="cof-qh-OTD">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="250" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cof-qh-OTD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoTableCell" rowHeight="250" id="Yjq-nl-NMO" customClass="PhotoTableViewCell" customModule="iFlickr" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="414" height="250"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="250"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Yjq-nl-NMO" id="1u5-4y-bSG">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>

@@ -19,7 +19,6 @@ class PhotoTableDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoTableCell", for: indexPath) as! PhotoTableViewCell
         let photo = photos[indexPath.row]
-        print(photo.title)
 
         cell.photoTitleLabel.text = photo.title
         cell.update(displaying: nil)
