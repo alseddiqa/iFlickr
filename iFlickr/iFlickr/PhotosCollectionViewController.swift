@@ -32,7 +32,6 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
     
     func fetchPhotosInUserLocation(lat: Double, lon: Double) {
         
-        print("----")
         self.store.fetchPhotosForLocation(lat:lat , lon: lon) {
             (photosResult) in
             switch photosResult {
