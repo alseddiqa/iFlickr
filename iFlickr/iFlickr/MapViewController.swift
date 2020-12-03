@@ -20,6 +20,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         // Do any additional setup after loading the view.
         
+        showInformationAlert()
         setUpMapView()
         getUserLocation()
         //markPhotosOnMap()
@@ -38,7 +39,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         mapView.showsUserLocation = true
         
         // zoom in the user exact location 
-        mapView.setUserTrackingMode(.follow, animated: true)
+        //mapView.setUserTrackingMode(.follow, animated: true)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -131,6 +132,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             break
         }
     }
+    
+    func showInformationAlert() {
+        let alert = UIAlertController(title: "Explore World Photos!", message: "Once you tap on any location on the map, we will show you list of photos.", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Ok, Got it!", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+
     /*
      // MARK: - Navigation
      

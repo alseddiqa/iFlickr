@@ -77,8 +77,6 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
     override func viewDidLayoutSubviews() {
         let itemWidth = view.safeAreaLayoutGuide.layoutFrame.size.width / 3
         let itemLength = view.safeAreaLayoutGuide.layoutFrame.size.height / 3
-        print("------")
-        print(itemWidth)
         
         let finalItemLength = floor(min(itemWidth, itemLength))
         
