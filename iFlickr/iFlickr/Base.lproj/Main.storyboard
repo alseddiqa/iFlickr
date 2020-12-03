@@ -577,7 +577,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="195" id="Cxi-bm-tLW" customClass="MovieCell" customModule="iFlickr" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteCell" rowHeight="195" id="Cxi-bm-tLW" customClass="FavoritePhotoTableViewCell" customModule="iFlickr" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="226" width="414" height="195"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cxi-bm-tLW" id="GC3-Jj-aOC">
@@ -633,6 +633,10 @@
                                     <outlet property="movieImage" destination="Lea-yZ-ZvM" id="GOP-4L-3od"/>
                                     <outlet property="movieRating" destination="XRZ-sf-xBD" id="so2-4s-FbU"/>
                                     <outlet property="movieTitle" destination="oA0-M6-ecn" id="L17-LE-iK6"/>
+                                    <outlet property="photoDate" destination="DIB-zQ-Ebq" id="Nad-kB-5F3"/>
+                                    <outlet property="photoImageView" destination="Lea-yZ-ZvM" id="A3s-mk-jjF"/>
+                                    <outlet property="photoTitle" destination="oA0-M6-ecn" id="o24-F0-OBE"/>
+                                    <outlet property="photoViews" destination="XRZ-sf-xBD" id="7QL-5N-YkX"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

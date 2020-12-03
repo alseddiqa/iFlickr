@@ -16,7 +16,7 @@ class UserViewController: UITableViewController {
     @IBOutlet var moviesTypesSegmentController: UISegmentedControl!
     @IBOutlet var spinner: UIActivityIndicatorView!
     
-    var favoritePhotos = [Photo]()
+    var favoritePhotos = [SavedPhoto]()
     
     var ref: DatabaseReference!
     var user: User!
@@ -45,9 +45,6 @@ class UserViewController: UITableViewController {
         }
         
         loadPhotos(forId: userID)
-//        loadWatchListMovies(forId: userID)
-//
-//        moviesTypesSegmentController.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -92,7 +89,7 @@ class UserViewController: UITableViewController {
                     
                     let photo = SavedPhoto(title: title, views: numOfViews, date: dateTaken)
                     photo.photoLink = URL(string: posterUrl)
-                    self.favoriteMovies.append(photo)
+                    self.favoritePhotos.append(photo)
                     
                 }
                 self.tableView.reloadData()
@@ -112,18 +109,15 @@ class UserViewController: UITableViewController {
         return favoritePhotos.count
     }
     
-    
-    
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath) as! FavoritePhotoTableViewCell
         
-        let movie = favoritePhotos[indexPath.row]
-        cell.movieTitle.text = movie.title
-        cell.movieDescription.text = movie.overview
-        cell.movieRating.text = "\(movie.rate)"
-        cell.movieImage.load(url: movie.posterImage!)
+        let photo = favoritePhotos[indexPath.row]
+        cell.photoTitle.text = photo.title
+        cell.photoViews.text = photo.views
+        cell.photoDate.text = photo.dateTaken
+        cell.photoImageView.load(url: photo.photoLink!)
         
         return cell
     }

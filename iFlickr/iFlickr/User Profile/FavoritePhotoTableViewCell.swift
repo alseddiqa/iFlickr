@@ -9,6 +9,10 @@ import UIKit
 
 class FavoritePhotoTableViewCell: UITableViewCell {
 
+    @IBOutlet var photoTitle: UILabel!
+    @IBOutlet var photoImageView: UIImageView!
+    @IBOutlet var photoViews: UILabel!
+    @IBOutlet var photoDate: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
