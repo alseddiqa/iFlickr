@@ -50,10 +50,10 @@ class PhotoDetailViewController: UIViewController {
             if snapshot.exists() {
                 //let value = snapshot.value as! NSDictionary
                 let id = Auth.auth().currentUser?.uid
-                self.ref.child("Users").child("\(id!)").child("FavoritePhotos").childByAutoId().setValue(favMovie)
+                self.ref.child("Users").child("\(id!)").child("FavoritePhotos").child(self.photo.photoID).setValue(favMovie)
             }
             else {
-                self.ref.child("Users").child(userID!).child("FavoritePhotos").childByAutoId().setValue(favMovie)
+                self.ref.child("Users").child(userID!).child("FavoritePhotos").child(self.photo.photoID).setValue(favMovie)
             }
             // ...
         }) { (error) in
@@ -72,7 +72,7 @@ class PhotoDetailViewController: UIViewController {
         else {
             favoriteButton.setImage(nil, for: .normal)
             isFavorite = false
-            favoriteButton.setTitle("Favorite", for: .normal)
+            favoriteButton.setTitle("Add Favorite", for: .normal)
 
         }
     }

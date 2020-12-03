@@ -54,7 +54,6 @@ class ImageStore {
         
         let documentDirectories = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = documentDirectories.first!
-        
         return documentDirectory.appendingPathComponent(key)
     }
     

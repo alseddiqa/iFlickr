@@ -17,16 +17,28 @@ class UserViewController: UITableViewController {
     @IBOutlet var spinner: UIActivityIndicatorView!
     
     var favoritePhotos = [SavedPhoto]()
-    
+    let userID = Auth.auth().currentUser?.uid
     var ref: DatabaseReference!
     var user: User!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        loadPhotos(forId: userID)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        getUserInformation(forId: userID)
+    }
+    
+    func getUserInformation(forId userID: String?) {
         spinner.startAnimating()
         ref = Database.database().reference()
-        let userID = Auth.auth().currentUser?.uid
         if userID != nil {
             ref.child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
@@ -44,31 +56,6 @@ class UserViewController: UITableViewController {
             }
         }
         
-        loadPhotos(forId: userID)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
-        let user = Auth.auth().currentUser
-        
-        if user == nil {
-            let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-            let destVC = storyboard.instantiateViewController(withIdentifier: "LoginController") as! LoginViewController
-            destVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-            destVC.modalTransitionStyle = UIModalTransitionStyle.coverVertical
-            self.present(destVC, animated: true, completion: nil)
-        }
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     func loadPhotos(forId userID: String?) {
@@ -90,11 +77,9 @@ class UserViewController: UITableViewController {
                     let photo = SavedPhoto(id: id, title: title, views: numOfViews, date: dateTaken)
                     photo.photoLink = URL(string: posterUrl)
                     self.favoritePhotos.append(photo)
-                    let indexPath = IndexPath(row: self.favoritePhotos.count - 1, section: 0)
-                    self.tableView.insertRows(at: [indexPath], with: .bottom)
                     
                 }
-                //self.tableView.reloadData()
+                self.tableView.reloadData()
             }
             // ...
         }) { (error) in
@@ -113,7 +98,6 @@ class UserViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath) as! FavoritePhotoTableViewCell
-        
         let photo = favoritePhotos[indexPath.row]
         cell.photoTitle.text = photo.title
         cell.photoViews.text = photo.views
@@ -121,5 +105,36 @@ class UserViewController: UITableViewController {
         cell.photoImageView.load(url: photo.photoLink!)
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView,
+                            commit editingStyle: UITableViewCell.EditingStyle,
+                            forRowAt indexPath: IndexPath) {
+        // If the table view is asking to commit a delete command...
+        if editingStyle == .delete {
+            let photo = favoritePhotos[indexPath.row]
+            let title = NSLocalizedString("Are you sure about this deletion?", comment: "")
+            let message = NSLocalizedString("You better be sure :)", comment: "")
+            let acceptRespone = NSLocalizedString("Yes, I'm aware of consequences", comment: "")
+            let noResponse = NSLocalizedString("No, backup", comment: "")
+
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: acceptRespone, style: .destructive, handler: { action in
+                self.deleteSafely(photo: photo, indexPath: indexPath)
+            }))
+            
+            alert.addAction(UIAlertAction(title: noResponse, style: .default, handler: nil))
+            
+            self.present(alert, animated: true)
+        }
+    }
+    
+    func deleteSafely(photo: SavedPhoto , indexPath: IndexPath) {
+        if let index = favoritePhotos.firstIndex(of: photo) {
+            favoritePhotos.remove(at: index)
+        }
+        // Also remove that row from the table view with an animation
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        ref.child("Users").child(userID!).child("FavoritePhotos").child(photo.photoId).removeValue()
     }
 }
