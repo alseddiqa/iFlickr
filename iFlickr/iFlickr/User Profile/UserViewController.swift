@@ -13,20 +13,33 @@ class UserViewController: UITableViewController {
     
     @IBOutlet var userName: UILabel!
     @IBOutlet var userEmail: UILabel!
-    @IBOutlet var moviesTypesSegmentController: UISegmentedControl!
     @IBOutlet var spinner: UIActivityIndicatorView!
+    @IBOutlet var favoriteLabel: UILabel!
     
-    var favoritePhotos = [Photo]()
-    
+    var favoritePhotos = [SavedPhoto]()
+    let userID = Auth.auth().currentUser?.uid
     var ref: DatabaseReference!
     var user: User!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        loadPhotos(forId: userID)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        getUserInformation(forId: userID)
+        favoriteLabel.text = "Favorite Photos ⭐"
+    }
+    
+    func getUserInformation(forId userID: String?) {
         spinner.startAnimating()
         ref = Database.database().reference()
-        let userID = Auth.auth().currentUser?.uid
         if userID != nil {
             ref.child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
@@ -44,60 +57,30 @@ class UserViewController: UITableViewController {
             }
         }
         
-//        loadMovies(forId: userID)
-//        loadWatchListMovies(forId: userID)
-//
-//        moviesTypesSegmentController.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
-        let user = Auth.auth().currentUser
-        
-        if user == nil {
-            let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-            let destVC = storyboard.instantiateViewController(withIdentifier: "LoginController") as! LoginViewController
-            destVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-            destVC.modalTransitionStyle = UIModalTransitionStyle.coverVertical
-            self.present(destVC, animated: true, completion: nil)
-        }
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-    
-    func loadMovies(forId userID: String?) {
-        ref.child("Users").child(userID!).child("FavoriteMovies").observeSingleEvent(of: .value, with: { (snapshot) in
+    func loadPhotos(forId userID: String?) {
+        ref.child("Users").child(userID!).child("FavoritePhotos").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             if snapshot.exists() {
-                self.favoriteMovies.removeAll()
+                self.favoritePhotos.removeAll()
                 let value = snapshot.value as! NSDictionary
                 
-                for (key, movieValues) in value {
+                for (key, photoValues) in value {
                     
-                    let movieInfo = movieValues as! NSDictionary
-                    let title = movieInfo["movieName"] as? String ?? ""
-                    //                let backImage = movieInfo["movieBackImage"]
-                    let posterUrl = movieInfo["posterImageUrl"] as? String ?? ""
-                    let overView = movieInfo["movieOverView"] as? String ?? ""
-                    let rating = movieInfo["movieRating"] as? String ?? ""
+                    let photoInfo = photoValues as! NSDictionary
+                    let id = photoInfo["id"] as? String ?? ""
+                    let title = photoInfo["photoTitle"] as? String ?? ""
+                    let posterUrl = photoInfo["imageUrl"] as? String ?? ""
+                    let dateTaken = photoInfo["dateTaken"] as? String ?? ""
+                    let numOfViews = photoInfo["numOfViews"] as? String ?? ""
                     
-                    let movie = SavedMovie(title: title, rate: rating, overview: overView)
-                    movie.posterImage = URL(string: posterUrl)
-                    self.favoriteMovies.append(movie)
+                    let photo = SavedPhoto(id: id, title: title, views: numOfViews, date: dateTaken)
+                    photo.photoLink = URL(string: posterUrl)
+                    self.favoritePhotos.append(photo)
                     
                 }
-                self.movies = self.favoriteMovies
                 self.tableView.reloadData()
-                
             }
             // ...
         }) { (error) in
@@ -113,19 +96,46 @@ class UserViewController: UITableViewController {
         return favoritePhotos.count
     }
     
-    
-    
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
-        
-        let movie = favoritePhotos[indexPath.row]
-        cell.movieTitle.text = movie.title
-        cell.movieDescription.text = movie.overview
-        cell.movieRating.text = "\(movie.rate)"
-        cell.movieImage.load(url: movie.posterImage!)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath) as! FavoritePhotoTableViewCell
+        let photo = favoritePhotos[indexPath.row]
+        cell.photoTitle.text = photo.title
+        cell.photoViews.text = photo.views + "views"
+        cell.photoDate.text = photo.dateTaken
+        cell.photoImageView.load(url: photo.photoLink!)
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView,
+                            commit editingStyle: UITableViewCell.EditingStyle,
+                            forRowAt indexPath: IndexPath) {
+        // If the table view is asking to commit a delete command...
+        if editingStyle == .delete {
+            let photo = favoritePhotos[indexPath.row]
+            let title = NSLocalizedString("Are you sure about this deletion?", comment: "")
+            let message = NSLocalizedString("You better be sure :)", comment: "")
+            let acceptRespone = NSLocalizedString("Yes, I'm aware of consequences", comment: "")
+            let noResponse = NSLocalizedString("No, backup", comment: "")
+
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: acceptRespone, style: .destructive, handler: { action in
+                self.deleteSafely(photo: photo, indexPath: indexPath)
+            }))
+            
+            alert.addAction(UIAlertAction(title: noResponse, style: .default, handler: nil))
+            
+            self.present(alert, animated: true)
+        }
+    }
+    
+    func deleteSafely(photo: SavedPhoto , indexPath: IndexPath) {
+        if let index = favoritePhotos.firstIndex(of: photo) {
+            favoritePhotos.remove(at: index)
+        }
+        // Also remove that row from the table view with an animation
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        ref.child("Users").child(userID!).child("FavoritePhotos").child(photo.photoId).removeValue()
     }
 }
