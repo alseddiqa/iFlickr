@@ -282,13 +282,114 @@
             </objects>
             <point key="canvasLocation" x="1253.6231884057972" y="427.90178571428572"/>
         </scene>
+        <!--Register View Controller-->
+        <scene sceneID="vAC-gl-bah">
+            <objects>
+                <viewController storyboardIdentifier="RegisterController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9Fi-mP-hjc" customClass="RegisterViewController" customModule="MoviesBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bUR-09-BeW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="TiV-cb-HPs">
+                                <rect key="frame" x="30" y="119" width="354" height="573"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="C6q-c8-90X">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="328"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera (1)" translatesAutoresizingMaskIntoConstraints="NO" id="8Si-le-bAD">
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="128"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="128" id="KI8-rv-Q2f"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iFlicker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYV-eq-jvS">
+                                                <rect key="frame" x="0.0" y="151" width="354" height="70.5"/>
+                                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="44"/>
+                                                <color key="textColor" red="0.078431372549019607" green="0.32549019607843138" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="380-cb-KYn">
+                                                <rect key="frame" x="0.0" y="244.5" width="354" height="26.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                <color key="textColor" red="0.92941176469999998" green="0.78823529410000004" blue="0.53333333329999999" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="78c-hc-Vf4">
+                                                <rect key="frame" x="0.0" y="294" width="354" height="34"/>
+                                                <color key="backgroundColor" red="0.97647058819999999" green="0.84705882349999995" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cVP-dv-MGd">
+                                        <rect key="frame" x="0.0" y="345" width="354" height="26.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="textColor" red="0.92941176469999998" green="0.78823529410000004" blue="0.53333333329999999" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X76-6O-VQ4">
+                                        <rect key="frame" x="0.0" y="388.5" width="354" height="34"/>
+                                        <color key="backgroundColor" red="0.97647058819999999" green="0.84705882349999995" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hTv-XE-RNn">
+                                        <rect key="frame" x="0.0" y="439.5" width="354" height="26.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="textColor" red="0.97647058819999999" green="0.84705882349999995" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PuQ-C7-2fG">
+                                        <rect key="frame" x="0.0" y="483" width="354" height="34"/>
+                                        <color key="backgroundColor" red="0.97647058819999999" green="0.84705882349999995" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ke-wC-bOA">
+                                        <rect key="frame" x="0.0" y="534" width="354" height="39"/>
+                                        <color key="backgroundColor" red="0.41502902333169644" green="0.55771295514196417" blue="0.47058701520000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <state key="normal" title="Sign Up">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="handleSignUp:" destination="9Fi-mP-hjc" eventType="touchUpInside" id="taZ-Ea-qse"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Udh-sX-lCt"/>
+                        <color key="backgroundColor" systemColor="labelColor"/>
+                        <constraints>
+                            <constraint firstItem="TiV-cb-HPs" firstAttribute="top" secondItem="Udh-sX-lCt" secondAttribute="top" constant="75" id="G3J-jD-C2s"/>
+                            <constraint firstItem="TiV-cb-HPs" firstAttribute="leading" secondItem="bUR-09-BeW" secondAttribute="leading" constant="30" id="Twv-Im-mdO"/>
+                            <constraint firstAttribute="trailing" secondItem="TiV-cb-HPs" secondAttribute="trailing" constant="30" id="cTa-gi-fT2"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="X76-6O-VQ4" id="BTF-vt-WXQ"/>
+                        <outlet property="nameField" destination="78c-hc-Vf4" id="xIC-UB-VjO"/>
+                        <outlet property="passwordTextField" destination="PuQ-C7-2fG" id="fsV-9D-MdD"/>
+                        <outlet property="signUpButton" destination="3Ke-wC-bOA" id="3k9-IB-nbW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kQn-J6-ndz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3905.7971014492755" y="-363.61607142857139"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="5r3-fM-M7z"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="camera (1)" width="512" height="512"/>
         <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
         <image name="photo.on.rectangle.angled" catalog="system" width="128" height="101"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
