@@ -62,7 +62,9 @@ class RegisterationViewController: UIViewController {
 
     @IBAction func handleSignUp(_ sender: UIButton) {
         
-        validateTextFields()
+        if validateTextFields() == false {
+            return
+        }
         
         ref = Database.database().reference()
         let name = nameField.text
@@ -77,14 +79,57 @@ class RegisterationViewController: UIViewController {
             }
             let id = user.uid
             self.ref.child("Users").child("\(id)").setValue(userInformation)
-            print("registered")
+            //print("registered")
             self.dismiss(animated: true, completion: nil)
         }
     }
     
     
-    func  validateTextFields() {
-        print("validated")
+    func validateTextFields() -> Bool{
+        
+        let name = nameField.text!
+        let email = emailTextField.text!
+        let pass = passwordTextField.text!
+
+        
+        if name.count == 0 {
+            nameField.layer.borderColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+            nameField.layer.borderWidth = 1.0
+            let title = NSLocalizedString("Name Field is empty!", comment: "")
+            let message = NSLocalizedString("Am I a joke to you?", comment: "")
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let respone = NSLocalizedString("Sorry, I'll fill them now", comment: "")
+            alert.addAction(UIAlertAction(title: respone, style: .destructive, handler: nil))
+            self.present(alert, animated: true)
+            
+            return false
+        }
+        else if email.count == 0 {
+            emailTextField.layer.borderColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+            emailTextField.layer.borderWidth = 1.0
+            let title = NSLocalizedString("Email Field is empty!", comment: "")
+            let message = NSLocalizedString("Am I a joke to you?", comment: "")
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let respone = NSLocalizedString("Sorry, I'll fill them now", comment: "")
+            alert.addAction(UIAlertAction(title: respone, style: .destructive, handler: nil))
+            self.present(alert, animated: true)
+            
+            return false
+        }
+        else if pass.count == 0 {
+            passwordTextField.layer.borderColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+            passwordTextField.layer.borderWidth = 1.0
+            let title = NSLocalizedString("Password Field is empty!", comment: "")
+            let message = NSLocalizedString("Am I a joke to you?", comment: "")
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let respone = NSLocalizedString("Sorry, I'll fill them now", comment: "")
+            alert.addAction(UIAlertAction(title: respone, style: .destructive, handler: nil))
+            self.present(alert, animated: true)
+            
+            return false
+        }
+        
+        return true
     }
     /*
     // MARK: - Navigation

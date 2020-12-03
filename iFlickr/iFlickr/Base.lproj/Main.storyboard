@@ -379,6 +379,105 @@
             </objects>
             <point key="canvasLocation" x="3905.7971014492755" y="-363.61607142857139"/>
         </scene>
+        <!--Profile-->
+        <scene sceneID="aqF-tl-V39">
+            <objects>
+                <viewController storyboardIdentifier="LoginController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="MNJ-KE-9h6" customClass="LoginViewController" customModule="MoviesBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gXm-Gq-Pmj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="22S-HV-aaN">
+                                <rect key="frame" x="30" y="137" width="354" height="508.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="7ci-iw-4GH">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="221.5"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera (1)" translatesAutoresizingMaskIntoConstraints="NO" id="zjS-WO-NWk">
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="128"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="128" id="L2l-aI-X4L"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iFlickr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="urE-qo-X3N">
+                                                <rect key="frame" x="0.0" y="151" width="354" height="70.5"/>
+                                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="44"/>
+                                                <color key="textColor" red="0.078431372550000003" green="0.32549019610000002" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Hbd-pq-JuL">
+                                        <rect key="frame" x="0.0" y="238.5" width="354" height="32"/>
+                                        <color key="backgroundColor" red="0.41502902330000002" green="0.55771295509999996" blue="0.47058701520000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <segments>
+                                            <segment title="Login"/>
+                                            <segment title="Register"/>
+                                        </segments>
+                                        <color key="tintColor" red="0.98823529409999999" green="0.90980392160000001" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="selectedSegmentTintColor" red="0.95686274510000002" green="0.92156862750000001" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="handleSegmentControllerChange:" destination="MNJ-KE-9h6" eventType="valueChanged" id="q7B-LB-PWD"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdb-gd-2Kx">
+                                        <rect key="frame" x="0.0" y="286.5" width="354" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="Trebuchet-BoldItalic" family="Trebuchet MS" pointSize="20"/>
+                                        <color key="textColor" red="0.92941176469999998" green="0.78823529410000004" blue="0.53333333329999999" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3PE-vg-5nz">
+                                        <rect key="frame" x="0.0" y="327" width="354" height="34"/>
+                                        <color key="backgroundColor" red="0.92941176469999998" green="0.78823529410000004" blue="0.53333333329999999" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aad-lB-ygF">
+                                        <rect key="frame" x="0.0" y="378" width="354" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="TrebuchetMS-Italic" family="Trebuchet MS" pointSize="20"/>
+                                        <color key="textColor" red="0.97647058819999999" green="0.84705882349999995" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JSY-xT-dmO">
+                                        <rect key="frame" x="0.0" y="418.5" width="354" height="34"/>
+                                        <color key="backgroundColor" red="0.92941176469999998" green="0.78823529410000004" blue="0.53333333329999999" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GCc-MU-vVM">
+                                        <rect key="frame" x="0.0" y="469.5" width="354" height="39"/>
+                                        <color key="backgroundColor" red="0.41502902330000002" green="0.55771295509999996" blue="0.47058701520000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <state key="normal" title="Sign In">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="handleLogin:" destination="MNJ-KE-9h6" eventType="touchUpInside" id="g2X-D6-ImI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="dgq-gO-hUx"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dgq-gO-hUx" firstAttribute="trailing" secondItem="22S-HV-aaN" secondAttribute="trailing" constant="30" id="1y7-35-sZs"/>
+                            <constraint firstItem="22S-HV-aaN" firstAttribute="top" secondItem="dgq-gO-hUx" secondAttribute="top" constant="93" id="Aat-c1-Jmv"/>
+                            <constraint firstItem="22S-HV-aaN" firstAttribute="leading" secondItem="dgq-gO-hUx" secondAttribute="leading" constant="30" id="WIy-3W-oY4"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="4lW-Vo-chb"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="3PE-vg-5nz" id="UKp-Uo-Soa"/>
+                        <outlet property="loginRegisterSegment" destination="Hbd-pq-JuL" id="YLT-kd-yNu"/>
+                        <outlet property="passwordTextField" destination="JSY-xT-dmO" id="evd-Xk-Upi"/>
+                        <outlet property="signInButton" destination="GCc-MU-vVM" id="y7F-SE-GlW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jsU-El-WSV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2605.7971014492755" y="-396.42857142857139"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="5r3-fM-M7z"/>
@@ -386,6 +485,7 @@
     <resources>
         <image name="camera (1)" width="512" height="512"/>
         <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="photo.on.rectangle.angled" catalog="system" width="128" height="101"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
