@@ -20,12 +20,9 @@ class LoginViewController: UIViewController {
         
         setUpTextFields()
         loginRegisterSegment.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
-        loginRegisterSegment.selectedSegmentIndex = 0
     }
     override func viewDidLoad() {
-        super.viewDidLoad()
-        loginRegisterSegment.selectedSegmentIndex = 0
-        
+        super.viewDidLoad()        
         // Do any additional setup after loading the view.
     }
     
@@ -50,7 +47,9 @@ class LoginViewController: UIViewController {
     
     @IBAction func handleLogin(_ sender: UIButton) {
         
-        validateFields()
+        if validateTextFields() == false {
+            return
+        }
         let email = emailTextField.text
         let password = passwordTextField.text
         
@@ -71,8 +70,37 @@ class LoginViewController: UIViewController {
         
     }
     
-    func validateFields() {
-        print("Validated")
+    func validateTextFields() -> Bool{
+        
+        let email = emailTextField.text!
+        let pass = passwordTextField.text!
+
+        if email.count == 0 {
+            emailTextField.layer.borderColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+            emailTextField.layer.borderWidth = 1.0
+            let title = NSLocalizedString("Email Field is empty!", comment: "")
+            let message = NSLocalizedString("Am I a joke to you?", comment: "")
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let respone = NSLocalizedString("Sorry, I'll fill them now", comment: "")
+            alert.addAction(UIAlertAction(title: respone, style: .destructive, handler: nil))
+            self.present(alert, animated: true)
+            
+            return false
+        }
+        else if pass.count == 0 {
+            passwordTextField.layer.borderColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+            passwordTextField.layer.borderWidth = 1.0
+            let title = NSLocalizedString("Password Field is empty!", comment: "")
+            let message = NSLocalizedString("Am I a joke to you?", comment: "")
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let respone = NSLocalizedString("Sorry, I'll fill them now", comment: "")
+            alert.addAction(UIAlertAction(title: respone, style: .destructive, handler: nil))
+            self.present(alert, animated: true)
+            
+            return false
+        }
+        
+        return true
     }
     
     @IBAction func handleSegmentControllerChange(_ sender: UISegmentedControl) {
