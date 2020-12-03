@@ -225,6 +225,7 @@
                                                     <color key="titleColor" red="0.97647058819999999" green="0.84705882349999995" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="addFavoriteMovie:" destination="uda-Jr-8N1" eventType="touchUpInside" id="MnF-N3-qgE"/>
                                                     <action selector="updateFavoriteButton" destination="uda-Jr-8N1" eventType="touchUpInside" id="5xL-Ed-S00"/>
                                                 </connections>
                                             </button>

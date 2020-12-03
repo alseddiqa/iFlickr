@@ -43,10 +43,10 @@ class PhotoDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func addFavoriteMovie(_ sender: Any) {
+    @IBAction func addFavoriteMovie(_ sender: UIButton) {
         let userID = Auth.auth().currentUser?.uid
         ref.child("Users").child(userID!).child("FavoritePhotos").observeSingleEvent(of: .value, with: { (snapshot) in
-            let favMovie = ["photoTitle": self.photo.title , "numOfViews": self.photo.views , "imageUrl": self.photo.remoteURL?.absoluteString , "dateTaken": self.dateTaken]
+            let favMovie = ["id": self.photo.photoID, "photoTitle": self.photo.title , "numOfViews": self.photo.views , "imageUrl": self.photo.remoteURL?.absoluteString , "dateTaken": self.dateTaken]
             if snapshot.exists() {
                 //let value = snapshot.value as! NSDictionary
                 let id = Auth.auth().currentUser?.uid

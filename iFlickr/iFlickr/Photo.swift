@@ -30,12 +30,15 @@ class Photo: Codable {
 }
 
 class SavedPhoto: Codable{
+    
+    var photoId:String
     var title: String
     var views: String
     var dateTaken: String
     var photoLink: URL?
     
-    init(title: String, views: String, date: String) {
+    init(id: String , title: String, views: String, date: String) {
+        self.photoId = id
         self.title = title
         self.views = views
         self.dateTaken = date

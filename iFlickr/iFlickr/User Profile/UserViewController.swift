@@ -72,7 +72,7 @@ class UserViewController: UITableViewController {
     }
     
     func loadPhotos(forId userID: String?) {
-        ref.child("Users").child(userID!).child("FavoriteMovies").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("Users").child(userID!).child("FavoritePhotos").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             if snapshot.exists() {
                 self.favoritePhotos.removeAll()
@@ -80,20 +80,21 @@ class UserViewController: UITableViewController {
                 
                 for (key, photoValues) in value {
                     
-                    let movieInfo = photoValues as! NSDictionary
-                    let title = movieInfo["movieName"] as? String ?? ""
-                    //                let backImage = movieInfo["movieBackImage"]
-                    let posterUrl = movieInfo["posterImageUrl"] as? String ?? ""
-                    let dateTaken = movieInfo["movieOverView"] as? String ?? ""
-                    let numOfViews = movieInfo["movieRating"] as? String ?? ""
+                    let photoInfo = photoValues as! NSDictionary
+                    let id = photoInfo["id"] as? String ?? ""
+                    let title = photoInfo["photoTitle"] as? String ?? ""
+                    let posterUrl = photoInfo["imageUrl"] as? String ?? ""
+                    let dateTaken = photoInfo["dateTaken"] as? String ?? ""
+                    let numOfViews = photoInfo["numOfViews"] as? String ?? ""
                     
-                    let photo = SavedPhoto(title: title, views: numOfViews, date: dateTaken)
+                    let photo = SavedPhoto(id: id, title: title, views: numOfViews, date: dateTaken)
                     photo.photoLink = URL(string: posterUrl)
                     self.favoritePhotos.append(photo)
+                    let indexPath = IndexPath(row: self.favoritePhotos.count - 1, section: 0)
+                    self.tableView.insertRows(at: [indexPath], with: .bottom)
                     
                 }
-                self.tableView.reloadData()
-                
+                //self.tableView.reloadData()
             }
             // ...
         }) { (error) in
