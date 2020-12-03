@@ -13,8 +13,8 @@ class UserViewController: UITableViewController {
     
     @IBOutlet var userName: UILabel!
     @IBOutlet var userEmail: UILabel!
-    @IBOutlet var moviesTypesSegmentController: UISegmentedControl!
     @IBOutlet var spinner: UIActivityIndicatorView!
+    @IBOutlet var favoriteLabel: UILabel!
     
     var favoritePhotos = [SavedPhoto]()
     let userID = Auth.auth().currentUser?.uid
@@ -34,6 +34,7 @@ class UserViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getUserInformation(forId: userID)
+        favoriteLabel.text = "Favorite Photos ⭐"
     }
     
     func getUserInformation(forId userID: String?) {
@@ -100,7 +101,7 @@ class UserViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath) as! FavoritePhotoTableViewCell
         let photo = favoritePhotos[indexPath.row]
         cell.photoTitle.text = photo.title
-        cell.photoViews.text = photo.views
+        cell.photoViews.text = photo.views + "views"
         cell.photoDate.text = photo.dateTaken
         cell.photoImageView.load(url: photo.photoLink!)
         
