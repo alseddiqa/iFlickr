@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zK1-PI-BPX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Fi-mP-hjc">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
@@ -282,10 +282,10 @@
             </objects>
             <point key="canvasLocation" x="1253.6231884057972" y="427.90178571428572"/>
         </scene>
-        <!--Register View Controller-->
+        <!--Registeration View Controller-->
         <scene sceneID="vAC-gl-bah">
             <objects>
-                <viewController storyboardIdentifier="RegisterController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9Fi-mP-hjc" customClass="RegisterViewController" customModule="MoviesBox" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9Fi-mP-hjc" customClass="RegisterationViewController" customModule="iFlickr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bUR-09-BeW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -302,7 +302,7 @@
                                                     <constraint firstAttribute="height" constant="128" id="KI8-rv-Q2f"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iFlicker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYV-eq-jvS">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iFlickr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYV-eq-jvS">
                                                 <rect key="frame" x="0.0" y="151" width="354" height="70.5"/>
                                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="44"/>
                                                 <color key="textColor" red="0.078431372549019607" green="0.32549019607843138" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
@@ -344,7 +344,7 @@
                                         <rect key="frame" x="0.0" y="483" width="354" height="34"/>
                                         <color key="backgroundColor" red="0.97647058819999999" green="0.84705882349999995" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES" textContentType="username"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ke-wC-bOA">
                                         <rect key="frame" x="0.0" y="534" width="354" height="39"/>
@@ -354,7 +354,7 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="handleSignUp:" destination="9Fi-mP-hjc" eventType="touchUpInside" id="taZ-Ea-qse"/>
+                                            <action selector="handleSignUp:" destination="9Fi-mP-hjc" eventType="touchUpInside" id="IbI-Z5-A2f"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -369,10 +369,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="emailTextField" destination="X76-6O-VQ4" id="BTF-vt-WXQ"/>
-                        <outlet property="nameField" destination="78c-hc-Vf4" id="xIC-UB-VjO"/>
-                        <outlet property="passwordTextField" destination="PuQ-C7-2fG" id="fsV-9D-MdD"/>
-                        <outlet property="signUpButton" destination="3Ke-wC-bOA" id="3k9-IB-nbW"/>
+                        <outlet property="emailTextField" destination="X76-6O-VQ4" id="tlz-u6-HtS"/>
+                        <outlet property="nameField" destination="78c-hc-Vf4" id="c12-Yq-TNU"/>
+                        <outlet property="passwordTextField" destination="PuQ-C7-2fG" id="WU1-Aw-eua"/>
+                        <outlet property="signUpButton" destination="3Ke-wC-bOA" id="bIG-g7-EQI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kQn-J6-ndz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

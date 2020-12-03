@@ -7,15 +7,85 @@
 
 import UIKit
 
+import FirebaseDatabase
+import FirebaseAuth
+
 class RegisterationViewController: UIViewController {
 
+    @IBOutlet var nameField: UITextField!
+    @IBOutlet var emailTextField: UITextField!
+    @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet var signUpButton: UIButton!
+    
+    //var delegate: SignUpDelegate!
+    var ref: DatabaseReference!
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        //self.delegate.updateView()
+
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        setUpTextFields()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
+    func setUpTextFields() {
+        
+        nameField.layer.cornerRadius = 15.0
+        nameField.layer.borderWidth = 2.0
+        nameField.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        nameField.layer.masksToBounds = true
+        
+        emailTextField.layer.cornerRadius = 15.0
+        emailTextField.layer.borderWidth = 2.0
+        emailTextField.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        emailTextField.layer.masksToBounds = true
+        
+        passwordTextField.layer.cornerRadius = 15.0
+        passwordTextField.layer.borderWidth = 2.0
+        passwordTextField.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        passwordTextField.layer.masksToBounds = true
+        
+        signUpButton.layer.cornerRadius = 15.0
+        signUpButton.layer.borderWidth = 2.0
+        signUpButton.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        signUpButton.layer.masksToBounds = true
+    }
 
+    @IBAction func handleSignUp(_ sender: UIButton) {
+        
+        validateTextFields()
+        
+        ref = Database.database().reference()
+        let name = nameField.text
+        let email =  emailTextField.text
+        let password =  passwordTextField.text
+        
+        let userInformation = ["name": name, "emailAddress": email]
+        Auth.auth().createUser(withEmail: email!, password: password!) { (authResult, error) in
+            guard let user = authResult?.user, error == nil else {
+                print("Error: \(error?.localizedDescription)")
+                return
+            }
+            let id = user.uid
+            self.ref.child("Users").child("\(id)").setValue(userInformation)
+            print("registered")
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    
+    func  validateTextFields() {
+        print("validated")
+    }
     /*
     // MARK: - Navigation
 
