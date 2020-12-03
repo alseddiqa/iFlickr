@@ -96,17 +96,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
         mapView.addAnnotation(annotation)
-        showPinnedLocationPhotos()
+        showPinnedLocationPhotos(coordinate: coordinate)
     }
     
-    func showPinnedLocationPhotos()
+    func showPinnedLocationPhotos(coordinate: CLLocationCoordinate2D)
     {
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let destVC = storyboard.instantiateViewController(withIdentifier: "PinnedController") as! PinnedLocationViewController
         
         destVC.modalPresentationStyle = UIModalPresentationStyle.popover
         destVC.modalTransitionStyle = UIModalTransitionStyle.coverVertical
-        destVC.delegate = self
+        destVC.cordinates = coordinate
         self.present(destVC, animated: true, completion: nil)
     }
     
