@@ -26,7 +26,7 @@ class PhotoLocationService: NSObject, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.requestAlwaysAuthorization() // you might replace this with whenInuse
+        locationManager.requestAlwaysAuthorization() 
         locationManager.startUpdatingLocation()
         //sleep(10)
     }
@@ -35,8 +35,6 @@ class PhotoLocationService: NSObject, CLLocationManagerDelegate {
         if let location = locations.last {
             latitude = location.coordinate.latitude
             longitude = location.coordinate.longitude
-            print("-----mang")
-            print(latitude)
             
             self.lastLocation = location
                     
