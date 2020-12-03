@@ -17,8 +17,10 @@ class PhotoDetailViewController: UIViewController {
     @IBOutlet var imageTitleLabel: UILabel!
     @IBOutlet var imageDateTakenLabel: UILabel!
     @IBOutlet var numOfViewsLabel: UILabel!
+    @IBOutlet var favoriteButton: UIButton!
     
     var dateTaken = ""
+    var isFavorite = false
     var photo: Photo!
     
     override func viewWillAppear(_ animated: Bool) {

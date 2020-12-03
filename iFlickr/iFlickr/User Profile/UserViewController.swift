@@ -44,7 +44,7 @@ class UserViewController: UITableViewController {
             }
         }
         
-//        loadMovies(forId: userID)
+        loadPhotos(forId: userID)
 //        loadWatchListMovies(forId: userID)
 //
 //        moviesTypesSegmentController.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
@@ -74,28 +74,27 @@ class UserViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    func loadMovies(forId userID: String?) {
+    func loadPhotos(forId userID: String?) {
         ref.child("Users").child(userID!).child("FavoriteMovies").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             if snapshot.exists() {
-                self.favoriteMovies.removeAll()
+                self.favoritePhotos.removeAll()
                 let value = snapshot.value as! NSDictionary
                 
-                for (key, movieValues) in value {
+                for (key, photoValues) in value {
                     
-                    let movieInfo = movieValues as! NSDictionary
+                    let movieInfo = photoValues as! NSDictionary
                     let title = movieInfo["movieName"] as? String ?? ""
                     //                let backImage = movieInfo["movieBackImage"]
                     let posterUrl = movieInfo["posterImageUrl"] as? String ?? ""
-                    let overView = movieInfo["movieOverView"] as? String ?? ""
-                    let rating = movieInfo["movieRating"] as? String ?? ""
+                    let dateTaken = movieInfo["movieOverView"] as? String ?? ""
+                    let numOfViews = movieInfo["movieRating"] as? String ?? ""
                     
-                    let movie = SavedMovie(title: title, rate: rating, overview: overView)
-                    movie.posterImage = URL(string: posterUrl)
-                    self.favoriteMovies.append(movie)
+                    let photo = SavedPhoto(title: title, views: numOfViews, date: dateTaken)
+                    photo.photoLink = URL(string: posterUrl)
+                    self.favoriteMovies.append(photo)
                     
                 }
-                self.movies = self.favoriteMovies
                 self.tableView.reloadData()
                 
             }

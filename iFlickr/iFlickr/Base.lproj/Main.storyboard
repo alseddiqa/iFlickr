@@ -200,23 +200,34 @@
                                         <rect key="frame" x="0.0" y="423" width="414" height="375"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Qo-nf-5xE">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="115"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="82.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="views" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dS8-hf-mJ6">
-                                                <rect key="frame" x="0.0" y="130" width="414" height="115"/>
+                                                <rect key="frame" x="0.0" y="97.5" width="414" height="82.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="erc-rr-ebX">
-                                                <rect key="frame" x="0.0" y="260" width="414" height="115"/>
+                                                <rect key="frame" x="0.0" y="195" width="414" height="82.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="inv-a2-ueK">
+                                                <rect key="frame" x="0.0" y="292.5" width="414" height="82.5"/>
+                                                <color key="backgroundColor" red="0.0" green="0.20000000000000001" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                <state key="normal" title="Add to Favorite">
+                                                    <color key="titleColor" red="0.97647058819999999" green="0.84705882349999995" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="updateFavoriteButton" destination="uda-Jr-8N1" eventType="touchUpInside" id="5xL-Ed-S00"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -234,6 +245,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="wzi-Fy-nit"/>
                     <connections>
+                        <outlet property="favoriteButton" destination="inv-a2-ueK" id="efF-cH-u9S"/>
                         <outlet property="imageDateTakenLabel" destination="erc-rr-ebX" id="lUe-C5-S5w"/>
                         <outlet property="imageTitleLabel" destination="4Qo-nf-5xE" id="tau-if-yBX"/>
                         <outlet property="imageView" destination="EHW-Hw-peE" id="xKT-E7-2Ua"/>

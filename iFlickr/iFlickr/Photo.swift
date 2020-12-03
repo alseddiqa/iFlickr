@@ -29,6 +29,20 @@ class Photo: Codable {
     
 }
 
+class SavedPhoto: Codable{
+    var title: String
+    var views: String
+    var dateTaken: String
+    var photoLink: URL?
+    
+    init(title: String, views: String, date: String) {
+        self.title = title
+        self.views = views
+        self.dateTaken = date
+    }
+}
+
+
 struct FlickrResponse: Codable {
     let photosInfo: FlickrPhotosResponse
     enum CodingKeys: String, CodingKey {
