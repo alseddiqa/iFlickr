@@ -417,7 +417,7 @@
                                         <color key="tintColor" red="0.98823529409999999" green="0.90980392160000001" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="selectedSegmentTintColor" red="0.95686274510000002" green="0.92156862750000001" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <action selector="handleSegmentControllerChange:" destination="MNJ-KE-9h6" eventType="valueChanged" id="q7B-LB-PWD"/>
+                                            <action selector="handleSegmentControllerChange:" destination="MNJ-KE-9h6" eventType="valueChanged" id="hNj-vd-p6a"/>
                                         </connections>
                                     </segmentedControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdb-gd-2Kx">
@@ -452,7 +452,7 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="handleLogin:" destination="MNJ-KE-9h6" eventType="touchUpInside" id="g2X-D6-ImI"/>
+                                            <action selector="handleLogin:" destination="MNJ-KE-9h6" eventType="touchUpInside" id="hfv-3K-thq"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -468,10 +468,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="4lW-Vo-chb"/>
                     <connections>
-                        <outlet property="emailTextField" destination="3PE-vg-5nz" id="UKp-Uo-Soa"/>
-                        <outlet property="loginRegisterSegment" destination="Hbd-pq-JuL" id="YLT-kd-yNu"/>
-                        <outlet property="passwordTextField" destination="JSY-xT-dmO" id="evd-Xk-Upi"/>
-                        <outlet property="signInButton" destination="GCc-MU-vVM" id="y7F-SE-GlW"/>
+                        <outlet property="emailTextField" destination="3PE-vg-5nz" id="LOe-VW-ezS"/>
+                        <outlet property="loginRegisterSegment" destination="Hbd-pq-JuL" id="CnH-gD-9yB"/>
+                        <outlet property="passwordTextField" destination="JSY-xT-dmO" id="7OM-Rw-OzV"/>
+                        <outlet property="signInButton" destination="GCc-MU-vVM" id="r7t-2c-au7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jsU-El-WSV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
