@@ -17,12 +17,12 @@ class RegisterationViewController: UIViewController {
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var signUpButton: UIButton!
     
-    //var delegate: SignUpDelegate!
+    var delegate: SignUpDelegate!
     var ref: DatabaseReference!
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        //self.delegate.updateView()
+        self.delegate.updateView()
 
     }
     override func viewWillAppear(_ animated: Bool) {

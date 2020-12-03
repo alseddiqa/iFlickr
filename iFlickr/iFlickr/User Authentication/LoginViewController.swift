@@ -20,12 +20,9 @@ class LoginViewController: UIViewController {
         
         setUpTextFields()
         loginRegisterSegment.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
-        loginRegisterSegment.selectedSegmentIndex = 0
     }
     override func viewDidLoad() {
-        super.viewDidLoad()
-        loginRegisterSegment.selectedSegmentIndex = 0
-        
+        super.viewDidLoad()        
         // Do any additional setup after loading the view.
     }
     

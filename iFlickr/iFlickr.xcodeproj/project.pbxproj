@@ -13,6 +13,7 @@
 		B83C973B25792AF300B7C4E7 /* RegisterationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83C973A25792AF300B7C4E7 /* RegisterationViewController.swift */; };
 		B83C974425792C1D00B7C4E7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B83C974325792C1D00B7C4E7 /* GoogleService-Info.plist */; };
 		B83C975D25794F3200B7C4E7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83C975C25794F3200B7C4E7 /* LoginViewController.swift */; };
+		B88872CF2579532E008EBA04 /* SignUpDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88872CE2579532E008EBA04 /* SignUpDelegate.swift */; };
 		B8B52CFE2573C5E600DBF3E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B52CFD2573C5E600DBF3E2 /* AppDelegate.swift */; };
 		B8B52D002573C5E600DBF3E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B52CFF2573C5E600DBF3E2 /* SceneDelegate.swift */; };
 		B8B52D022573C5E600DBF3E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B52D012573C5E600DBF3E2 /* ViewController.swift */; };
@@ -65,6 +66,7 @@
 		B83C973A25792AF300B7C4E7 /* RegisterationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationViewController.swift; sourceTree = "<group>"; };
 		B83C974325792C1D00B7C4E7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B83C975C25794F3200B7C4E7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		B88872CE2579532E008EBA04 /* SignUpDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDelegate.swift; sourceTree = "<group>"; };
 		B8B52CFA2573C5E600DBF3E2 /* iFlickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iFlickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B52CFD2573C5E600DBF3E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8B52CFF2573C5E600DBF3E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -152,8 +154,17 @@
 			isa = PBXGroup;
 			children = (
 				B83C973A25792AF300B7C4E7 /* RegisterationViewController.swift */,
+				B88872CE2579532E008EBA04 /* SignUpDelegate.swift */,
 			);
 			path = "User Registeration";
+			sourceTree = "<group>";
+		};
+		B88872CA25795310008EBA04 /* User Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				B83C975C25794F3200B7C4E7 /* LoginViewController.swift */,
+			);
+			path = "User Authentication";
 			sourceTree = "<group>";
 		};
 		B8B52CF12573C5E600DBF3E2 = {
@@ -186,7 +197,7 @@
 				B8B52D012573C5E600DBF3E2 /* ViewController.swift */,
 				B8EE6FA12576605A00124B47 /* PhotoOverlay.swift */,
 				B8B52D032573C5E600DBF3E2 /* Main.storyboard */,
-				B83C975C25794F3200B7C4E7 /* LoginViewController.swift */,
+				B88872CA25795310008EBA04 /* User Authentication */,
 				B83C973F25792B0000B7C4E7 /* User Registeration */,
 				B8DAC7FC2578126E0007B880 /* PinnedLocationViewController.swift */,
 				B8EE6F852574FB2600124B47 /* PhotoDetailViewController.swift */,
@@ -470,6 +481,7 @@
 				B83C973B25792AF300B7C4E7 /* RegisterationViewController.swift in Sources */,
 				B8DAC805257816F30007B880 /* PhotoTableViewCell.swift in Sources */,
 				B8B52D662573F8BF00DBF3E2 /* PhotoCell.swift in Sources */,
+				B88872CF2579532E008EBA04 /* SignUpDelegate.swift in Sources */,
 				B83C975D25794F3200B7C4E7 /* LoginViewController.swift in Sources */,
 				B8B52D7025740A1E00DBF3E2 /* PhotoStore.swift in Sources */,
 				B8B52D512573DE8400DBF3E2 /* Photo.swift in Sources */,
