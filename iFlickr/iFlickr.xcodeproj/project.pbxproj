@@ -181,6 +181,15 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		B88872E925796006008EBA04 /* User Profile */ = {
+			isa = PBXGroup;
+			children = (
+				B88872DC25795E47008EBA04 /* UserViewController.swift */,
+				B88872E125795E70008EBA04 /* User.swift */,
+			);
+			path = "User Profile";
+			sourceTree = "<group>";
+		};
 		B8B52CF12573C5E600DBF3E2 = {
 			isa = PBXGroup;
 			children = (
@@ -211,8 +220,7 @@
 				B8B52D012573C5E600DBF3E2 /* ViewController.swift */,
 				B8EE6FA12576605A00124B47 /* PhotoOverlay.swift */,
 				B8B52D032573C5E600DBF3E2 /* Main.storyboard */,
-				B88872DC25795E47008EBA04 /* UserViewController.swift */,
-				B88872E125795E70008EBA04 /* User.swift */,
+				B88872E925796006008EBA04 /* User Profile */,
 				B88872D825795730008EBA04 /* Settings */,
 				B88872CA25795310008EBA04 /* User Authentication */,
 				B83C973F25792B0000B7C4E7 /* User Registeration */,
