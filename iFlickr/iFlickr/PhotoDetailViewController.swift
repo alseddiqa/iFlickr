@@ -18,6 +18,7 @@ class PhotoDetailViewController: UIViewController {
     @IBOutlet var imageDateTakenLabel: UILabel!
     @IBOutlet var numOfViewsLabel: UILabel!
     
+    var dateTaken = ""
     var photo: Photo!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,7 +30,8 @@ class PhotoDetailViewController: UIViewController {
         
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "MM-dd-yyyy HH:mm"
-        imageDateTakenLabel.text = dateFormatterGet.string(from: photo.dateTaken)
+        dateTaken = dateFormatterGet.string(from: photo.dateTaken)
+        imageDateTakenLabel.text = dateTaken
         ref = Database.database().reference()
         
     }
@@ -41,18 +43,15 @@ class PhotoDetailViewController: UIViewController {
     
     @IBAction func addFavoriteMovie(_ sender: Any) {
         let userID = Auth.auth().currentUser?.uid
-        ref.child("Users").child(userID!).child("FavoriteMovies").observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            let posterPath = self.lowRes.appending(self.movie.posterPath)
-            let backImagePath = self.highRes.appending(self.movie.backdropPath)
-            let favMovie = ["movieName": self.movie.title , "movieRating": String(self.movie.voteAverage) , "movieOverView": self.movie.overview , "posterImageUrl": posterPath , "movieBackImage": backImagePath]
+        ref.child("Users").child(userID!).child("FavoritePhotos").observeSingleEvent(of: .value, with: { (snapshot) in
+            let favMovie = ["photoTitle": self.photo.title , "numOfViews": self.photo.views , "imageUrl": self.photo.remoteURL?.absoluteString , "dateTaken": self.dateTaken]
             if snapshot.exists() {
                 //let value = snapshot.value as! NSDictionary
                 let id = Auth.auth().currentUser?.uid
-                self.ref.child("Users").child("\(id!)").child("FavoriteMovies").childByAutoId().setValue(favMovie)
+                self.ref.child("Users").child("\(id!)").child("FavoritePhotos").childByAutoId().setValue(favMovie)
             }
             else {
-                self.ref.child("Users").child(userID!).child("FavoriteMovies").childByAutoId().setValue(favMovie)
+                self.ref.child("Users").child(userID!).child("FavoritePhotos").childByAutoId().setValue(favMovie)
             }
             // ...
         }) { (error) in
