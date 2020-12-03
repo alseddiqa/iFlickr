@@ -1,0 +1,6 @@
+framework module Pods_iFlickr {
+  umbrella header "Pods-iFlickr-umbrella.h"
+
+  export *
+  module * { export * }
+}
