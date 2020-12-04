@@ -114,6 +114,8 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
                 let photo = photoDataSource.photos[selectedIndexPath.row]
                 let destinationVC = segue.destination as! PhotoDetailViewController
                 destinationVC.photo = photo
+                let userVC = self.tabBarController?.viewControllers![0] as! UserViewController
+                destinationVC.userPhotoStore = userVC.userPhotoStore
             }
         default:
             preconditionFailure("Unexpected segue identifier.")

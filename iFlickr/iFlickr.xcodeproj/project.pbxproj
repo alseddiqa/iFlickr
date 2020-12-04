@@ -14,6 +14,7 @@
 		B83C974425792C1D00B7C4E7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B83C974325792C1D00B7C4E7 /* GoogleService-Info.plist */; };
 		B83C975D25794F3200B7C4E7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83C975C25794F3200B7C4E7 /* LoginViewController.swift */; };
 		B85E3B5C257A569A000F2301 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85E3B5B257A569A000F2301 /* APITests.swift */; };
+		B85E3B61257A75EF000F2301 /* UserPhotoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85E3B60257A75EF000F2301 /* UserPhotoStore.swift */; };
 		B88872CF2579532E008EBA04 /* SignUpDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88872CE2579532E008EBA04 /* SignUpDelegate.swift */; };
 		B88872D425795727008EBA04 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88872D325795727008EBA04 /* SettingsViewController.swift */; };
 		B88872DD25795E47008EBA04 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88872DC25795E47008EBA04 /* UserViewController.swift */; };
@@ -73,6 +74,7 @@
 		B83C974325792C1D00B7C4E7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B83C975C25794F3200B7C4E7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B85E3B5B257A569A000F2301 /* APITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITests.swift; sourceTree = "<group>"; };
+		B85E3B60257A75EF000F2301 /* UserPhotoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotoStore.swift; sourceTree = "<group>"; };
 		B88872CE2579532E008EBA04 /* SignUpDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDelegate.swift; sourceTree = "<group>"; };
 		B88872D325795727008EBA04 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B88872DC25795E47008EBA04 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				B88872E125795E70008EBA04 /* User.swift */,
 				B88872F625797154008EBA04 /* FavoritePhotoTableViewCell.swift */,
 				B88872FB257986E6008EBA04 /* SavedPhoto.swift */,
+				B85E3B60257A75EF000F2301 /* UserPhotoStore.swift */,
 			);
 			path = "User Profile";
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				B8DAC80A257825FD0007B880 /* PhotosTableDataSource.swift in Sources */,
 				B83C973B25792AF300B7C4E7 /* RegisterationViewController.swift in Sources */,
 				B88872D425795727008EBA04 /* SettingsViewController.swift in Sources */,
+				B85E3B61257A75EF000F2301 /* UserPhotoStore.swift in Sources */,
 				B88872DD25795E47008EBA04 /* UserViewController.swift in Sources */,
 				B8DAC805257816F30007B880 /* PhotoTableViewCell.swift in Sources */,
 				B88872FC257986E6008EBA04 /* SavedPhoto.swift in Sources */,

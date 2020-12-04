@@ -15,7 +15,6 @@ enum PhotoError: Error {
 class PhotoStore {
     
     let imageStore = ImageStore()
-//    var photos = [Photo]()
     
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
@@ -59,6 +58,7 @@ class PhotoStore {
             completion(.failure(PhotoError.missingImageURL))
             return
         }
+        
         let request = URLRequest(url: photoURL)
         let task = session.dataTask(with: request) {
             (data, response, error) in

@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseDatabase
 
 class PhotoDetailViewController: UIViewController {
 
@@ -21,9 +19,7 @@ class PhotoDetailViewController: UIViewController {
     var dateTaken = ""
     var isFavorite: Bool?
     var photo: Photo!
-    let userID = Auth.auth().currentUser?.uid
-    var favoritePhotos = [SavedPhoto]()
-    var ref: DatabaseReference!
+    var userPhotoStore: UserPhotoStore!
 
 
     override func viewWillAppear(_ animated: Bool) {
@@ -37,8 +33,7 @@ class PhotoDetailViewController: UIViewController {
         dateFormatterGet.dateFormat = "MM-dd-yyyy HH:mm"
         dateTaken = dateFormatterGet.string(from: photo.dateTaken)
         imageDateTakenLabel.text = dateTaken
-        ref = Database.database().reference()
-        loadStoredPhotos(forId: userID)
+        checkIfPhotoExistInFavList()
         
     }
     override func viewDidLoad() {
@@ -48,21 +43,9 @@ class PhotoDetailViewController: UIViewController {
     }
     
     @IBAction func addFavoriteMovie(_ sender: UIButton) {
-        let userID = Auth.auth().currentUser?.uid
-        ref.child("Users").child(userID!).child("FavoritePhotos").observeSingleEvent(of: .value, with: { (snapshot) in
-            let favMovie = ["id": self.photo.photoID, "photoTitle": self.photo.title , "numOfViews": self.photo.views , "imageUrl": self.photo.remoteURL?.absoluteString , "dateTaken": self.dateTaken]
-            if snapshot.exists() {
-                //let value = snapshot.value as! NSDictionary
-                let id = Auth.auth().currentUser?.uid
-                self.ref.child("Users").child("\(id!)").child("FavoritePhotos").child(self.photo.photoID).setValue(favMovie)
-            }
-            else {
-                self.ref.child("Users").child(userID!).child("FavoritePhotos").child(self.photo.photoID).setValue(favMovie)
-            }
-            // ...
-        }) { (error) in
-            print(error.localizedDescription)
-        }
+        let photoTemp = SavedPhoto(id: photo.photoID, title: photo.title, views: photo.views, date: dateTaken)
+        photoTemp.photoLink = photo.remoteURL
+        userPhotoStore.addPhotoToList(photo: photoTemp)
         updateFavoriteButton()
         isFavorite = true
     }
@@ -82,42 +65,11 @@ class PhotoDetailViewController: UIViewController {
         }
     }
     
-    func loadStoredPhotos(forId userID: String?) {
-        ref.child("Users").child(userID!).child("FavoritePhotos").observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            if snapshot.exists() {
-                let value = snapshot.value as! NSDictionary
-                for (key, photoValues) in value {
-                    let photoInfo = photoValues as! NSDictionary
-                    let id = photoInfo["id"] as? String ?? ""
-                    let title = photoInfo["photoTitle"] as? String ?? ""
-                    let posterUrl = photoInfo["imageUrl"] as? String ?? ""
-                    let dateTaken = photoInfo["dateTaken"] as? String ?? ""
-                    let numOfViews = photoInfo["numOfViews"] as? String ?? ""
-                    
-                    let photo = SavedPhoto(id: id, title: title, views: numOfViews, date: dateTaken)
-                    photo.photoLink = URL(string: posterUrl)
-                    self.favoritePhotos.append(photo)
-                    
-                }
-                self.checkIfPhotoExist()
-            }
-            // ...
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-    }
-    
-    func checkIfPhotoExist() {
+    func checkIfPhotoExistInFavList() {
         let photoTemp = SavedPhoto(id: photo.photoID, title: photo.title, views: photo.views, date: dateTaken)
-        
-        if favoritePhotos.firstIndex(of: photoTemp) != nil {
-            isFavorite = true
-        }
-        else {
-            isFavorite = false
-        }
-        
+        isFavorite = userPhotoStore.checkIfPhotoExist(photo: photoTemp)
         updateFavoriteButton()
     }
+    
+    
 }
