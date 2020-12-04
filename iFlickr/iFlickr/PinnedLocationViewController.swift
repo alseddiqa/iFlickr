@@ -78,6 +78,8 @@ class PinnedLocationViewController: UITableViewController {
                 tableView.indexPathForSelectedRow?.row {
                 let photo = photosDataSource.photos[selectedIndexPath]
                 let destinationVC = segue.destination as! PhotoDetailViewController
+                let userVC = self.tabBarController?.viewControllers![0] as! UserViewController
+                destinationVC.userPhotoStore = userVC.userPhotoStore
                 destinationVC.photo = photo
             }
         default:

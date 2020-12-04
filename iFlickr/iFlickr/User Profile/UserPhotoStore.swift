@@ -56,6 +56,7 @@ class UserPhotoStore {
             favoritePhotos.remove(at: index)
         }
         ref.child("Users").child(userID!).child("FavoritePhotos").child(photo.photoId).removeValue()
+        
     }
     
     func addPhotoToList(photo: SavedPhoto) {

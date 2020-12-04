@@ -82,7 +82,7 @@ class UserViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath) as! FavoritePhotoTableViewCell
         let photo = userPhotoStore.favoritePhotos[indexPath.row]
         cell.photoTitle.text = photo.title
-        cell.photoViews.text = photo.views + "views"
+        cell.photoViews.text = photo.views + " views"
         cell.photoDate.text = photo.dateTaken
         cell.photoImageView.load(url: photo.photoLink!)
         
@@ -113,6 +113,7 @@ class UserViewController: UITableViewController {
     
     func deleteSafely(photo: SavedPhoto , indexPath: IndexPath) {
         // Also remove that row from the table view with an animation
+        userPhotoStore.deletePhotoFromList(photo: photo)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
 }

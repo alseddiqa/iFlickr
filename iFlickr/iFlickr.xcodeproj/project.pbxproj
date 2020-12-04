@@ -15,6 +15,7 @@
 		B83C975D25794F3200B7C4E7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83C975C25794F3200B7C4E7 /* LoginViewController.swift */; };
 		B85E3B5C257A569A000F2301 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85E3B5B257A569A000F2301 /* APITests.swift */; };
 		B85E3B61257A75EF000F2301 /* UserPhotoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85E3B60257A75EF000F2301 /* UserPhotoStore.swift */; };
+		B85E3B69257A900D000F2301 /* UserPhotoStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85E3B68257A900D000F2301 /* UserPhotoStoreTests.swift */; };
 		B88872CF2579532E008EBA04 /* SignUpDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88872CE2579532E008EBA04 /* SignUpDelegate.swift */; };
 		B88872D425795727008EBA04 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88872D325795727008EBA04 /* SettingsViewController.swift */; };
 		B88872DD25795E47008EBA04 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88872DC25795E47008EBA04 /* UserViewController.swift */; };
@@ -75,6 +76,7 @@
 		B83C975C25794F3200B7C4E7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B85E3B5B257A569A000F2301 /* APITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITests.swift; sourceTree = "<group>"; };
 		B85E3B60257A75EF000F2301 /* UserPhotoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotoStore.swift; sourceTree = "<group>"; };
+		B85E3B68257A900D000F2301 /* UserPhotoStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotoStoreTests.swift; sourceTree = "<group>"; };
 		B88872CE2579532E008EBA04 /* SignUpDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDelegate.swift; sourceTree = "<group>"; };
 		B88872D325795727008EBA04 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B88872DC25795E47008EBA04 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				B8B52D142573C5E800DBF3E2 /* iFlickrTests.swift */,
 				B8B52D162573C5E800DBF3E2 /* Info.plist */,
 				B85E3B5B257A569A000F2301 /* APITests.swift */,
+				B85E3B68257A900D000F2301 /* UserPhotoStoreTests.swift */,
 			);
 			path = iFlickrTests;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B85E3B69257A900D000F2301 /* UserPhotoStoreTests.swift in Sources */,
 				B85E3B5C257A569A000F2301 /* APITests.swift in Sources */,
 				B8B52D152573C5E800DBF3E2 /* iFlickrTests.swift in Sources */,
 			);
