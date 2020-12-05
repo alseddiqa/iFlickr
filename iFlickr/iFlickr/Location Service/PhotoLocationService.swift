@@ -28,7 +28,6 @@ class PhotoLocationService: NSObject, CLLocationManagerDelegate {
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.requestAlwaysAuthorization() 
         locationManager.startUpdatingLocation()
-        //sleep(10)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -57,15 +56,4 @@ class PhotoLocationService: NSObject, CLLocationManagerDelegate {
         delegate.tracingLocation(currentLocation: currentLocation)
 }
     
-//     func getLatitude() -> CLLocationDegrees {
-//        return latitude
-//    }
-//    
-//     func getLongitude() -> CLLocationDegrees {
-//        return longitude
-//    }
-    
-    //notification -> Multiple listeners
-    //delegate -> single listener
-    //completion handler pat -> Single listener (more modern)
 }

@@ -8,8 +8,14 @@
 import UIKit
 
 class ImageStore {
+    
+    //Declaring the Cache
     let cache = NSCache<NSString, UIImage>()
     
+    /// A function that add an image with a specified key
+    /// - Parameters:
+    ///   - image: the image
+    ///   - key: the identifier for the photo
     func setImage(_ image: UIImage, forKey key: String) {
         cache.setObject(image, forKey: key as NSString)
         
@@ -25,7 +31,6 @@ class ImageStore {
     }
     
     func image(forKey key:String) -> UIImage? {
-        //return cache.object(forKey: key as NSString)
         if let existingImage = cache.object(forKey: key as NSString) {
             return existingImage
         }
@@ -38,9 +43,10 @@ class ImageStore {
         
     }
     
-    func deleteImage(forKey key: String) {
+    /// A helper function to remove photo from cache
+    /// - Parameter key: the identifier for the photo
+    func deleteImageFromCache(forKey key: String) {
         cache.removeObject(forKey: key as NSString)
-        
         let url = imageURL(forKey: key)
         do {
             try FileManager.default.removeItem(at: url)
@@ -51,7 +57,6 @@ class ImageStore {
     }
     
     func imageURL(forKey key: String) -> URL {
-        
         let documentDirectories = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = documentDirectories.first!
         return documentDirectory.appendingPathComponent(key)
