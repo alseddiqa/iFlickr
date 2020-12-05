@@ -29,19 +29,6 @@ class Photo: Codable {
     
 }
 
-struct FlickrResponse: Codable {
-    let photosInfo: FlickrPhotosResponse
-    enum CodingKeys: String, CodingKey {
-        case photosInfo = "photos"
-    }
-}
-struct FlickrPhotosResponse: Codable {
-    let photos: [Photo]
-    enum CodingKeys: String, CodingKey {
-        case photos = "photo"
-    }
-}
-
 extension Photo: Equatable {
     static func == (lhs: Photo, rhs: Photo) -> Bool {
         // Two Photos are the same if they have the same photoID

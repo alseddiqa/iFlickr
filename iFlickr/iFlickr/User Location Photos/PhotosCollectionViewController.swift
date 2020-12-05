@@ -14,6 +14,7 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
     var store: PhotoStore!
     let photoDataSource = PhotoDataSource()
     var locationManager: PhotoLocationService!
+    var userPhotoStore = UserPhotoStore()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -114,8 +115,7 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
                 let photo = photoDataSource.photos[selectedIndexPath.row]
                 let destinationVC = segue.destination as! PhotoDetailViewController
                 destinationVC.photo = photo
-                let userVC = self.tabBarController?.viewControllers![0] as! UserViewController
-                destinationVC.userPhotoStore = userVC.userPhotoStore
+                destinationVC.userPhotoStore = self.userPhotoStore
             }
         default:
             preconditionFailure("Unexpected segue identifier.")

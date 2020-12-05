@@ -13,6 +13,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
     var annotitionsCounter = 0
+    var userPhotoStore = UserPhotoStore()
+
     
     @IBOutlet var mapView: MKMapView!
     override func viewDidLoad() {
@@ -102,14 +104,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     func showPinnedLocationPhotos(coordinate: CLLocationCoordinate2D)
     {
-        let userVC = self.tabBarController?.viewControllers![0] as! UserViewController
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let destVC = storyboard.instantiateViewController(withIdentifier: "PinnedController") as! PinnedLocationViewController
         
         destVC.modalPresentationStyle = UIModalPresentationStyle.popover
         destVC.modalTransitionStyle = UIModalTransitionStyle.coverVertical
         destVC.cordinates = coordinate
-        destVC.userPhotoStore = userVC.userPhotoStore
+        destVC.userPhotoStore = self.userPhotoStore
         self.present(destVC, animated: true, completion: nil)
     }
     

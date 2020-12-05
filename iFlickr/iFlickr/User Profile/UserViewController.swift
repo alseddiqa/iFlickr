@@ -116,4 +116,18 @@ class UserViewController: UITableViewController {
         userPhotoStore.deletePhotoFromList(photo: photo)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "showFavorite":
+            if let selectedIndexPath =
+                tableView.indexPathForSelectedRow?.row {
+                let photo = userPhotoStore.favoritePhotos[selectedIndexPath]
+                let destinationVC = segue.destination as! FavoritePhotoViewController
+                destinationVC.photo = photo
+            }
+        default:
+            preconditionFailure("Unexpected segue identifier.")
+        }
+    }
 }
