@@ -102,12 +102,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     func showPinnedLocationPhotos(coordinate: CLLocationCoordinate2D)
     {
+        let userVC = self.tabBarController?.viewControllers![0] as! UserViewController
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let destVC = storyboard.instantiateViewController(withIdentifier: "PinnedController") as! PinnedLocationViewController
         
         destVC.modalPresentationStyle = UIModalPresentationStyle.popover
         destVC.modalTransitionStyle = UIModalTransitionStyle.coverVertical
         destVC.cordinates = coordinate
+        destVC.userPhotoStore = userVC.userPhotoStore
         self.present(destVC, animated: true, completion: nil)
     }
     

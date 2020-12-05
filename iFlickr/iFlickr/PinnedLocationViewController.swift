@@ -10,11 +10,12 @@ import CoreLocation
 
 class PinnedLocationViewController: UITableViewController {
 
-    var photos = [Photo]()
+//    var photos = [Photo]()
     var store: PhotoStore!
     var photosDataSource =
         PhotoTableDataSource()
     var cordinates: CLLocationCoordinate2D!
+    var userPhotoStore: UserPhotoStore!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +80,7 @@ class PinnedLocationViewController: UITableViewController {
                 let photo = photosDataSource.photos[selectedIndexPath]
                 let destinationVC = segue.destination as! PhotoDetailViewController
                 destinationVC.photo = photo
+                destinationVC.userPhotoStore = self.userPhotoStore
             }
         default:
             preconditionFailure("Unexpected segue identifier.")
