@@ -23,8 +23,8 @@ class UserViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        //loadPhotos(forId: userID)
         userPhotoStore = UserPhotoStore()
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -34,7 +34,7 @@ class UserViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(observeStoreLoadNotification(note:)),
                                                name: .photosStoreLoadedPhotos,

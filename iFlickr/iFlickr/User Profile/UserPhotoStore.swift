@@ -17,7 +17,7 @@ class UserPhotoStore {
     
     init() {
         ref = Database.database().reference()
-        loadPhotos(forId: userID)
+        self.loadPhotos(forId: self.userID)
     }
     
     func loadPhotos(forId userID: String?) {
@@ -29,7 +29,7 @@ class UserPhotoStore {
                 self.favoritePhotos.removeAll()
                 let value = snapshot.value as! NSDictionary
                 
-                for (key, photoValues) in value {
+                for (_, photoValues) in value {
                     let photoInfo = photoValues as! NSDictionary
                     let id = photoInfo["id"] as? String ?? ""
                     let title = photoInfo["photoTitle"] as? String ?? ""
@@ -54,6 +54,7 @@ class UserPhotoStore {
     func deletePhotoFromList(photo: SavedPhoto) {
         if let index = favoritePhotos.firstIndex(of: photo) {
             favoritePhotos.remove(at: index)
+            print("----------------> \(photo.title)")
         }
         ref.child("Users").child(userID!).child("FavoritePhotos").child(photo.photoId).removeValue()
         
@@ -75,6 +76,7 @@ class UserPhotoStore {
         }) { (error) in
             print(error.localizedDescription)
         }
+        favoritePhotos.append(photo)
     }
     
     func checkIfPhotoExist(photo: SavedPhoto) -> Bool {
