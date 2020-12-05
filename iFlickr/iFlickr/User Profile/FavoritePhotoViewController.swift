@@ -7,6 +7,7 @@
 
 import UIKit
 
+///A  view controller to show the favorite photo
 class FavoritePhotoViewController: UIViewController {
 
     var photo: SavedPhoto!
@@ -20,6 +21,5 @@ class FavoritePhotoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
 }

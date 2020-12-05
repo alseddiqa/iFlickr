@@ -12,6 +12,7 @@ import FirebaseAuth
 
 class RegisterationViewController: UIViewController {
 
+    //Declaring outlets vars for the registeration controller
     @IBOutlet var nameField: UITextField!
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
@@ -34,7 +35,6 @@ class RegisterationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
     func setUpTextFields() {
@@ -131,14 +131,5 @@ class RegisterationViewController: UIViewController {
         
         return true
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

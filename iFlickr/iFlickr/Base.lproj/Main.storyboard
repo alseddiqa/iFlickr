@@ -359,7 +359,7 @@
                                         <rect key="frame" x="0.0" y="483" width="354" height="34"/>
                                         <color key="backgroundColor" red="0.97647058819999999" green="0.84705882349999995" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES" textContentType="username"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" textContentType="username"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ke-wC-bOA">
                                         <rect key="frame" x="0.0" y="534" width="354" height="39"/>

@@ -10,6 +10,7 @@ import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
+    //Declaring VC outlet
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var loginRegisterSegment: UISegmentedControl!
@@ -21,11 +22,12 @@ class LoginViewController: UIViewController {
         setUpTextFields()
         loginRegisterSegment.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()        
-        // Do any additional setup after loading the view.
     }
     
+    /// styling out textfields in login view controller
     func setUpTextFields() {
         loginRegisterSegment.selectedSegmentIndex = 0
         
@@ -45,6 +47,8 @@ class LoginViewController: UIViewController {
         signInButton.layer.masksToBounds = true
     }
     
+    /// A helper function execute login check with server for the entered
+    /// - Parameter sender: login button
     @IBAction func handleLogin(_ sender: UIButton) {
         
         if validateTextFields() == false {
@@ -62,14 +66,14 @@ class LoginViewController: UIViewController {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mainTabBarController = storyboard.instantiateViewController(identifier: "TabBarController")
             
-            // This is to get the SceneDelegate object from your view controller
-            // then call the change root view controller function to change to main tab bar
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
         }
         
         
     }
     
+    /// A helper function that checks if any of the fields is empy
+    /// - Returns: true if all filled
     func validateTextFields() -> Bool{
         
         let email = emailTextField.text!
@@ -103,6 +107,8 @@ class LoginViewController: UIViewController {
         return true
     }
     
+    /// A function that pops register VC as a modal to the user to register
+    /// - Parameter sender: segment controller
     @IBAction func handleSegmentControllerChange(_ sender: UISegmentedControl) {
         
         if sender.selectedSegmentIndex == 1 {
@@ -115,17 +121,6 @@ class LoginViewController: UIViewController {
             self.present(destVC, animated: true, completion: nil)
         }
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 
