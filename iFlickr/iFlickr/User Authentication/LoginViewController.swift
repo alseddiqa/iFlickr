@@ -72,8 +72,8 @@ class LoginViewController: UIViewController {
         
     }
     
-    /// A helper function that checks if any of the fields is empy
-    /// - Returns: true if all filled
+    /// A helper function to check if fields were empty, (i plan to further improve this check to make sure fields have a min length text)
+    /// - Returns: true if all filled, false if one of the fields is empty
     func validateTextFields() -> Bool{
         
         let email = emailTextField.text!
@@ -124,6 +124,7 @@ class LoginViewController: UIViewController {
     
 }
 
+/// An extension useed to style out segment controller, to change font/color
 extension UISegmentedControl {
     
     func setTitleColor(_ color: UIColor, state: UIControl.State = .normal) {

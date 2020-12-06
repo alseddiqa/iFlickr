@@ -25,7 +25,7 @@ class UserViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        //Calling store init here to make sure profile view is updated
+        //Calling store init here to get the list of favorite photos to the signed in user
         userPhotoStore = UserPhotoStore()
     }
     
