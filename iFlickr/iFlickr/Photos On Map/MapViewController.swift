@@ -9,22 +9,25 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapViewController: UIViewController, CLLocationManagerDelegate {
+class MapViewController: UIViewController {
     
-    var currentLocation: CLLocation!
-    var annotitionsCounter = 0
-    var userPhotoStore = UserPhotoStore()
-    var locationManager: PhotoLocationService!
-    
+    //Declaring map view outlet
     @IBOutlet var mapView: MKMapView!
+    
+    //Declaring variables for the VC
+    var currentLocation: CLLocation!   // current location of the user
+    var annotitionsCounter = 0  // annotation counter to keep track of how many on the map
+    var userPhotoStore = UserPhotoStore()  // the signed in user photo store
+    var locationManager: PhotoLocationService! //location service class to current location
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-                
         getUserLocation()
         showInformationAlert()
         setUpMapView()
     }
     
+    /// A function used to get the user location when the view is loaded
     func getUserLocation() {
      
         self.locationManager = PhotoLocationService()
@@ -38,11 +41,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
+    /// A functiom hat adds a segment controller to the map with diffrent view
     func setUpMapView() {
+        
         let standardString = NSLocalizedString("Standard", comment: "Standard map view")
         let hybridString = NSLocalizedString("Hybrid", comment: "Hybrid map view")
-        let satelliteString
-            = NSLocalizedString("Satellite", comment: "Satellite map view")
+        let satelliteString = NSLocalizedString("Satellite", comment: "Satellite map view")
+        
         let segmentedControl
             = UISegmentedControl(items: [standardString, hybridString, satelliteString])
         segmentedControl.backgroundColor = UIColor.systemBackground
@@ -65,10 +70,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    /// A  function that handles the tap on the map, and gets the location where the user tapped
+    /// - Parameter sender: tap gesture recognizer
     @IBAction func triggerTouchAction(_ sender: UITapGestureRecognizer){
         if sender.state == .ended{
             let locationInView = sender.location(in: mapView)
             let tappedCoordinate = mapView.convert(locationInView, toCoordinateFrom: mapView)
+            
+            //Making sure only one annotation is placed on the map
             if annotitionsCounter == 1 {
                 mapView.removeAnnotations(mapView.annotations)
                 annotitionsCounter = 0
@@ -82,6 +91,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    /// A function that adds annotion on map for the sent cordinates where the user tapped
+    /// - Parameter coordinate: location of where the user tapped
     func addAnnotation(coordinate:CLLocationCoordinate2D){
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
@@ -89,6 +100,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         showPinnedLocationPhotos(coordinate: coordinate)
     }
     
+    /// A function that pops the VC to show the list of photos for the pinned location
+    /// - Parameter coordinate: the location where the user tapped -> location of the annoation
     func showPinnedLocationPhotos(coordinate: CLLocationCoordinate2D)
     {
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -102,6 +115,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
+    /// A function that handles the map view type change
+    /// - Parameter segControl: segment controller
     @objc func mapTypeChanged(_ segControl: UISegmentedControl) {
         switch segControl.selectedSegmentIndex {
         case 0:
@@ -115,9 +130,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    /// A function that shows the user an alert to tell more about how to use the map vc
     func showInformationAlert() {
-        let alert = UIAlertController(title: "Explore World Photos!", message: "Once you tap on any location on the map, we will show you list of photos.", preferredStyle: .alert)
-
+        let alert = UIAlertController(title: "Explore The World!", message: "Once you tap on any location on the map, we will show you list of photos for it.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok, Got it!", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
