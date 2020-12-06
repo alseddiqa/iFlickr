@@ -25,22 +25,27 @@ class UserViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        //Calling store init here to get the list of favorite photos to the signed in user
-        userPhotoStore = UserPhotoStore()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        let tabBar = tabBarController as! MainTabViewController
+        self.userPhotoStore = tabBar.userPhotoStore
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let tabBar = tabBarController as! MainTabViewController
+        self.userPhotoStore = tabBar.userPhotoStore
+        userPhotoStore.delegate = self
+        
         //Observing notification when userPhotoStore has loaded images from the server/DB, update table view
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(observeStoreLoadNotification(note:)),
                                                name: .photosStoreLoadedPhotos,
                                                object: nil)
+
         getUserInformation(forId: userID)
         favoriteLabel.text = "Favorite Photos ⭐"
     }
@@ -82,7 +87,6 @@ class UserViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath) as! FavoritePhotoTableViewCell
         let photo = userPhotoStore.favoritePhotos[indexPath.row]
         cell.photoTitle.text = photo.title
@@ -138,5 +142,12 @@ class UserViewController: UITableViewController {
         default:
             preconditionFailure("Unexpected segue identifier.")
         }
+    }
+}
+
+extension UserViewController: UserPhotoStoreDelegate {
+    func updateList(updateList: [SavedPhoto]) {
+        self.userPhotoStore.favoritePhotos = updateList
+        tableView.reloadData()
     }
 }

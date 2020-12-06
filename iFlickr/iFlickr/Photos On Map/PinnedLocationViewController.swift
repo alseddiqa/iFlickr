@@ -18,6 +18,7 @@ class PinnedLocationViewController: UITableViewController {
     //Cordinates of the pinned location on the map
     var cordinates: CLLocationCoordinate2D!
     var userPhotoStore: UserPhotoStore!
+    var tabBar: MainTabViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +35,6 @@ class PinnedLocationViewController: UITableViewController {
             (photosResult) in
             switch photosResult {
             case let .success(photos):
-                print("Found \(photos.count) photos.")
                 self.photosDataSource.photos = photos
             case let .failure(error):
                 print("Error fetching photos: \(error)")
@@ -77,6 +77,7 @@ class PinnedLocationViewController: UITableViewController {
                 let destinationVC = segue.destination as! PhotoDetailViewController
                 destinationVC.photo = photo
                 destinationVC.userPhotoStore = self.userPhotoStore
+                destinationVC.tabBar = self.tabBar
             }
         default:
             preconditionFailure("Unexpected segue identifier.")

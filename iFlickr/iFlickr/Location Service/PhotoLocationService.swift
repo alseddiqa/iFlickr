@@ -37,7 +37,7 @@ class PhotoLocationService: NSObject, CLLocationManagerDelegate {
             
             self.lastLocation = location
                     
-                    // use for real time update location
+            // use for real time update location
             updateLocation(currentLocation: location)
         }
     }
@@ -54,6 +54,6 @@ class PhotoLocationService: NSObject, CLLocationManagerDelegate {
           }
           
         delegate.tracingLocation(currentLocation: currentLocation)
-}
+    }
     
 }

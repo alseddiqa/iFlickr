@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import FirebaseAuth
 
 class MapViewController: UIViewController {
     
@@ -15,13 +16,23 @@ class MapViewController: UIViewController {
     @IBOutlet var mapView: MKMapView!
     
     //Declaring variables for the VC
+    let userID = Auth.auth().currentUser?.uid
     var currentLocation: CLLocation!   // current location of the user
     var annotitionsCounter = 0  // annotation counter to keep track of how many on the map
-    var userPhotoStore = UserPhotoStore()  // the signed in user photo store
     var locationManager: PhotoLocationService! //location service class to current location
+    var userPhotoStore: UserPhotoStore!
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tabBar = tabBarController as! MainTabViewController
+        self.userPhotoStore = tabBar.userPhotoStore
+        
         getUserLocation()
         showInformationAlert()
         setUpMapView()
@@ -107,10 +118,12 @@ class MapViewController: UIViewController {
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let destVC = storyboard.instantiateViewController(withIdentifier: "PinnedController") as! PinnedLocationViewController
         
+        let theTabBar = tabBarController as! MainTabViewController
         destVC.modalPresentationStyle = UIModalPresentationStyle.popover
         destVC.modalTransitionStyle = UIModalTransitionStyle.coverVertical
         destVC.cordinates = coordinate
         destVC.userPhotoStore = self.userPhotoStore
+        destVC.tabBar = theTabBar
         self.present(destVC, animated: true, completion: nil)
     }
     

@@ -25,6 +25,7 @@
 		B88872FC257986E6008EBA04 /* SavedPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88872FB257986E6008EBA04 /* SavedPhoto.swift */; };
 		B8A7455A257C05BB00B4388C /* FlickrResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A74559257C05BB00B4388C /* FlickrResponse.swift */; };
 		B8A7455F257C0E6B00B4388C /* FavoritePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A7455E257C0E6B00B4388C /* FavoritePhotoViewController.swift */; };
+		B8A7456C257D75A900B4388C /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A7456B257D75A900B4388C /* MainTabViewController.swift */; };
 		B8B52CFE2573C5E600DBF3E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B52CFD2573C5E600DBF3E2 /* AppDelegate.swift */; };
 		B8B52D002573C5E600DBF3E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B52CFF2573C5E600DBF3E2 /* SceneDelegate.swift */; };
 		B8B52D052573C5E600DBF3E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B52D032573C5E600DBF3E2 /* Main.storyboard */; };
@@ -87,6 +88,7 @@
 		B88872FB257986E6008EBA04 /* SavedPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPhoto.swift; sourceTree = "<group>"; };
 		B8A74559257C05BB00B4388C /* FlickrResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrResponse.swift; sourceTree = "<group>"; };
 		B8A7455E257C0E6B00B4388C /* FavoritePhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePhotoViewController.swift; sourceTree = "<group>"; };
+		B8A7456B257D75A900B4388C /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		B8B52CFA2573C5E600DBF3E2 /* iFlickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iFlickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B52CFD2573C5E600DBF3E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8B52CFF2573C5E600DBF3E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				B8A74551257C055C00B4388C /* Photos Model */,
 				B8A74563257C0FC500B4388C /* Location Service */,
 				B8B52D062573C5E800DBF3E2 /* Assets.xcassets */,
+				B8A7456B257D75A900B4388C /* MainTabViewController.swift */,
 				B8B52D082573C5E800DBF3E2 /* LaunchScreen.storyboard */,
 				B8B52D0B2573C5E800DBF3E2 /* Info.plist */,
 				B83C974325792C1D00B7C4E7 /* GoogleService-Info.plist */,
@@ -577,6 +580,7 @@
 				B8B52D512573DE8400DBF3E2 /* Photo.swift in Sources */,
 				B8B52D7525740A4B00DBF3E2 /* ImageStore.swift in Sources */,
 				B8B52CFE2573C5E600DBF3E2 /* AppDelegate.swift in Sources */,
+				B8A7456C257D75A900B4388C /* MainTabViewController.swift in Sources */,
 				B8EE6F862574FB2600124B47 /* PhotoDetailViewController.swift in Sources */,
 				B8DAC7FD2578126E0007B880 /* PinnedLocationViewController.swift in Sources */,
 				B8B52D002573C5E600DBF3E2 /* SceneDelegate.swift in Sources */,

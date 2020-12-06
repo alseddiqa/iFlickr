@@ -12,14 +12,17 @@ import FirebaseDatabase
 class UserPhotoStore {
     
     //set up the values for server, user id to get the photos for
-    let userID = Auth.auth().currentUser?.uid
+    var userID: String!
     var favoritePhotos = [SavedPhoto]()
     var ref: DatabaseReference!
+    var delegate: UserPhotoStoreDelegate?
+
     
-    init() {
+    init(userId: String?) {
         ref = Database.database().reference()
-        if userID != nil {
-            self.loadPhotos(forId: self.userID)
+        if userId != nil {
+            self.userID = userId
+            self.loadPhotos(forId: self.userID!)
         }
     }
     
@@ -31,7 +34,7 @@ class UserPhotoStore {
         ref.child("Users").child(userID!).child("FavoritePhotos").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             if snapshot.exists() {
-                self.favoritePhotos.removeAll()
+                //self.favoritePhotos.removeAll()
                 let value = snapshot.value as! NSDictionary
                 
                 for (_, photoValues) in value {
@@ -74,6 +77,11 @@ class UserPhotoStore {
         let favMovie = ["id": photo.photoId, "photoTitle": photo.title , "numOfViews": photo.views , "imageUrl": photo.photoLink!.absoluteString , "dateTaken": photo.dateTaken]
         self.ref.child("Users").child(self.userID!).child("FavoritePhotos").child(photo.photoId).setValue(favMovie)
         favoritePhotos.append(photo)
+        
+        guard let delegate = self.delegate else {
+            return
+        }
+        delegate.updateList(updateList: favoritePhotos)
     }
     
     /// A helper function to check if given photo exist in the list of favorite photos
@@ -93,3 +101,8 @@ class UserPhotoStore {
 extension Notification.Name {
     static let photosStoreLoadedPhotos = Notification.Name(rawValue: "photosStoreLoadedPhotos")
 }
+
+protocol UserPhotoStoreDelegate {
+    func updateList(updateList: [SavedPhoto])
+}
+

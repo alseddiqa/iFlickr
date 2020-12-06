@@ -257,10 +257,10 @@
             </objects>
             <point key="canvasLocation" x="3007" y="97"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab View Controller-->
         <scene sceneID="3BC-eK-2nr">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarController" automaticallyAdjustsScrollViewInsets="NO" id="zK1-PI-BPX" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" automaticallyAdjustsScrollViewInsets="NO" id="zK1-PI-BPX" customClass="MainTabViewController" customModule="iFlickr" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0pi-NO-Pwe">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

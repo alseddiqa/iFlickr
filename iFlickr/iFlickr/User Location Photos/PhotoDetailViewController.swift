@@ -21,8 +21,12 @@ class PhotoDetailViewController: UIViewController {
     var isFavorite: Bool? // a vlaue to be set to true or false if the photo is in the favorite list of the user
     var photo: Photo! // photo variable
     var userPhotoStore: UserPhotoStore! // user store holding the favorite photos
+    var tabBar: MainTabViewController!
 
-
+    override func viewDidDisappear(_ animated: Bool) {
+        tabBar.userPhotoStore = self.userPhotoStore
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         

@@ -7,24 +7,29 @@
 
 import UIKit
 import CoreLocation
+import FirebaseAuth
 
 class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate {
     
     // Declaring the collection view outlet to display photos
     @IBOutlet var photosCollectionView: UICollectionView!
     
+    let userID = Auth.auth().currentUser?.uid
     var store: PhotoStore!
     let photoDataSource = PhotoDataSource()
     var locationManager: PhotoLocationService!
-    var userPhotoStore = UserPhotoStore()
+    var userPhotoStore: UserPhotoStore!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        //userPhotoStore = UserPhotoStore(userId: userID)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tabBar = tabBarController as! MainTabViewController
+        self.userPhotoStore = tabBar.userPhotoStore
         //instantiating the class holding the location manager
         self.locationManager = PhotoLocationService()
         locationManager.delegate = self
@@ -124,7 +129,9 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
                 let photo = photoDataSource.photos[selectedIndexPath.row]
                 let destinationVC = segue.destination as! PhotoDetailViewController
                 destinationVC.photo = photo
+                let tabBar = tabBarController as! MainTabViewController
                 destinationVC.userPhotoStore = self.userPhotoStore
+                destinationVC.tabBar = tabBar
             }
         default:
             preconditionFailure("Unexpected segue identifier.")
