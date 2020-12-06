@@ -11,11 +11,13 @@ import FirebaseDatabase
 
 class UserViewController: UITableViewController {
     
+    //Defining outlets for the view
     @IBOutlet var userName: UILabel!
     @IBOutlet var userEmail: UILabel!
     @IBOutlet var spinner: UIActivityIndicatorView!
     @IBOutlet var favoriteLabel: UILabel!
     
+    //Initializing the user values
     let userID = Auth.auth().currentUser?.uid
     var userPhotoStore: UserPhotoStore!
     var ref: DatabaseReference!
@@ -23,30 +25,38 @@ class UserViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        userPhotoStore = UserPhotoStore()
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        
+        let tabBar = tabBarController as! MainTabViewController
+        self.userPhotoStore = tabBar.userPhotoStore
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let tabBar = tabBarController as! MainTabViewController
+        self.userPhotoStore = tabBar.userPhotoStore
+        userPhotoStore.delegate = self
+        
+        //Observing notification when userPhotoStore has loaded images from the server/DB, update table view
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(observeStoreLoadNotification(note:)),
                                                name: .photosStoreLoadedPhotos,
                                                object: nil)
+
         getUserInformation(forId: userID)
         favoriteLabel.text = "Favorite Photos ⭐"
     }
     
+    //when load is done, this function will fire to update table view
     @objc func observeStoreLoadNotification(note: Notification) {
         tableView.reloadData()
     }
     
+    /// A function that gets the current signed in user information and display
+    /// - Parameter userID: the user id to retrieve information for.
     func getUserInformation(forId userID: String?) {
         spinner.startAnimating()
         ref = Database.database().reference()
@@ -71,14 +81,12 @@ class UserViewController: UITableViewController {
     
     
     // MARK: - Table view data source
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return userPhotoStore.favoritePhotos.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath) as! FavoritePhotoTableViewCell
         let photo = userPhotoStore.favoritePhotos[indexPath.row]
         cell.photoTitle.text = photo.title
@@ -111,9 +119,35 @@ class UserViewController: UITableViewController {
         }
     }
     
+    /// A  function that fires favorite photo deletion when user confirm the delete after alert
+    /// - Parameters:
+    ///   - photo: the photo to delete from the list
+    ///   - indexPath: the index of the photo in the table
     func deleteSafely(photo: SavedPhoto , indexPath: IndexPath) {
         // Also remove that row from the table view with an animation
         userPhotoStore.deletePhotoFromList(photo: photo)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+    
+    /// Segue into detail view of the favorite photo
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "showFavorite":
+            if let selectedIndexPath =
+                tableView.indexPathForSelectedRow?.row {
+                let photo = userPhotoStore.favoritePhotos[selectedIndexPath]
+                let destinationVC = segue.destination as! FavoritePhotoViewController
+                destinationVC.photo = photo
+            }
+        default:
+            preconditionFailure("Unexpected segue identifier.")
+        }
+    }
+}
+
+extension UserViewController: UserPhotoStoreDelegate {
+    func updateList(updateList: [SavedPhoto]) {
+        self.userPhotoStore.favoritePhotos = updateList
+        tableView.reloadData()
     }
 }

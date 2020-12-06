@@ -8,13 +8,14 @@
 import Foundation
 import CoreLocation
 
-
+// Declare the end point to search for flick photos.
 enum EndPoint: String {
     case photosSearch = "flickr.photos.search"
 }
 
 struct FlickrAPI {
     
+    //Declaring params to prepare for call
     let baseURLString = "https://api.flickr.com/services/rest"
     let apiKey = "a6d819499131071f158fd740860a5a88"
 
@@ -26,11 +27,20 @@ struct FlickrAPI {
                          parameters: ["extras": "url_z,date_taken,geo,views"])
     }
     
+    /// The Flickr API init to get photos for a supploed lat and long
+    /// - Parameters:
+    ///   - lat: latitude of the location to get photos for
+    ///   - lon: longitude of the location get the photos for
     init(lat:Double, lon: Double) {
         self.latitude = String(lat)
         self.longitude = String(lon)
     }
     
+    /// A function to set up the Flickr URL to get photos from
+    /// - Parameters:
+    ///   - endPoint: the end point we try to hit
+    ///   - parameters: additional params to be added if any
+    /// - Returns: a URL after adding all of the params and end point
     func flickrURL(endPoint: EndPoint,
                                   parameters: [String:String]?) -> URL {
         var components = URLComponents(string: baseURLString)!
@@ -58,10 +68,14 @@ struct FlickrAPI {
                 queryItems.append(item)
             }
         }
+        
         components.queryItems = queryItems
         return components.url!
     }
     
+    /// A funtion that decodes the response and return an array of photos
+    /// - Parameter data: the data to decode
+    /// - Returns: the array of decoded photos from Flickr
     static func photos(fromJSON data: Data) -> Result<[Photo], Error> {
         do {
             let decoder = JSONDecoder()
@@ -79,39 +93,6 @@ struct FlickrAPI {
             return .failure(error)
         }
     }
-    
-//    func getDistanceFromPhoto(photoID: String) -> Double {
-//
-//
-//        let url = URL(string: "https://www.flickr.com/services/rest/" + "?method=\(EndPoint.photoGeoLocation.rawValue)" + "&api_key=\(apiKey)"+"&photo_id=\(photoID)&format=json&nojsoncallback=1")!
-//
-////        print(url)
-//        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-//
-//        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-//
-//        let task = session.dataTask(with: request) { (data, response, error) in
-//            // This will run when the network request returns
-//            if let error = error {
-//                print(error.localizedDescription)
-//            } else if let data = data {
-//
-//                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-//
-//                print(dataDictionary["photo"] as! [String:Any])
-//
-//
-//                let currentCordinates = CLLocation(latitude: 5.0, longitude: 5.0)
-//                let coordinate₁ = CLLocation(latitude: 5.0, longitude: 3.0)
-//
-//                //let distanceInMeters = coordinate₀.distance(from: coordinate₁)
-//
-//
-//            }
-//        }
-//        task.resume()
-//        return 0
-//    }
     
 }
 

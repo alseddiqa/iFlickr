@@ -10,28 +10,31 @@ import CoreLocation
 
 class PinnedLocationViewController: UITableViewController {
 
-//    var photos = [Photo]()
+    //Declaring vars
     var store: PhotoStore!
     var photosDataSource =
         PhotoTableDataSource()
+    
+    //Cordinates of the pinned location on the map
     var cordinates: CLLocationCoordinate2D!
     var userPhotoStore: UserPhotoStore!
+    var tabBar: MainTabViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         store = PhotoStore()
-        retreivePhotosForLocation()
+        
+        retrievePhotosForLocation()
         
         tableView.dataSource = photosDataSource
-        
     }
 
-    func retreivePhotosForLocation() {
+    func retrievePhotosForLocation() {
         self.store.fetchPhotosForLocation(lat:cordinates.latitude , lon: cordinates.longitude) {
             (photosResult) in
             switch photosResult {
             case let .success(photos):
-                print("Found \(photos.count) photos.")
                 self.photosDataSource.photos = photos
             case let .failure(error):
                 print("Error fetching photos: \(error)")
@@ -42,13 +45,6 @@ class PinnedLocationViewController: UITableViewController {
         }
     }
 
-    // MARK: - Table view data source
-
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        print(photos.count)
-//        return photos.count
-//    }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let photo = photosDataSource.photos[indexPath.row]
@@ -81,6 +77,7 @@ class PinnedLocationViewController: UITableViewController {
                 let destinationVC = segue.destination as! PhotoDetailViewController
                 destinationVC.photo = photo
                 destinationVC.userPhotoStore = self.userPhotoStore
+                destinationVC.tabBar = self.tabBar
             }
         default:
             preconditionFailure("Unexpected segue identifier.")

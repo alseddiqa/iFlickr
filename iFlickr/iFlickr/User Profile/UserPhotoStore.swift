@@ -11,22 +11,30 @@ import FirebaseDatabase
 
 class UserPhotoStore {
     
-    let userID = Auth.auth().currentUser?.uid
+    //set up the values for server, user id to get the photos for
+    var userID: String!
     var favoritePhotos = [SavedPhoto]()
     var ref: DatabaseReference!
+    var delegate: UserPhotoStoreDelegate?
+
     
-    init() {
+    init(userId: String?) {
         ref = Database.database().reference()
-        self.loadPhotos(forId: self.userID)
+        if userId != nil {
+            self.userID = userId
+            self.loadPhotos(forId: self.userID!)
+        }
     }
     
+    /// A function that makes a call to Fire DB and fetch favortie photo for a specific user
+    /// - Parameter userID: the id of the user to fetch photos for
     func loadPhotos(forId userID: String?) {
         let nc = NotificationCenter.default
 
         ref.child("Users").child(userID!).child("FavoritePhotos").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             if snapshot.exists() {
-                self.favoritePhotos.removeAll()
+                //self.favoritePhotos.removeAll()
                 let value = snapshot.value as! NSDictionary
                 
                 for (_, photoValues) in value {
@@ -42,6 +50,7 @@ class UserPhotoStore {
                     self.favoritePhotos.append(photo)
                     
                 }
+                //Posting notification when the photos load is done
                 nc.post(name: .photosStoreLoadedPhotos, object: self)
             }
             // ...
@@ -51,34 +60,33 @@ class UserPhotoStore {
         
     }
     
+    /// A function that delete a photo from the store, and execute a deletion call on the server
+    /// - Parameter photo: the photo to delete
     func deletePhotoFromList(photo: SavedPhoto) {
         if let index = favoritePhotos.firstIndex(of: photo) {
             favoritePhotos.remove(at: index)
-            print("----------------> \(photo.title)")
         }
+        
         ref.child("Users").child(userID!).child("FavoritePhotos").child(photo.photoId).removeValue()
         
     }
     
+    /// A funtion tha adds a photo to the favorite list
+    /// - Parameter photo: the photo to add to the list of favorite photos
     func addPhotoToList(photo: SavedPhoto) {
-        let userID = Auth.auth().currentUser?.uid
-        ref.child("Users").child(userID!).child("FavoritePhotos").observeSingleEvent(of: .value, with: { (snapshot) in
-            let favMovie = ["id": photo.photoId, "photoTitle": photo.title , "numOfViews": photo.views , "imageUrl": photo.photoLink!.absoluteString , "dateTaken": photo.dateTaken]
-            if snapshot.exists() {
-                //let value = snapshot.value as! NSDictionary
-                let id = Auth.auth().currentUser?.uid
-                self.ref.child("Users").child("\(id!)").child("FavoritePhotos").child(photo.photoId).setValue(favMovie)
-            }
-            else {
-                self.ref.child("Users").child(userID!).child("FavoritePhotos").child(photo.photoId).setValue(favMovie)
-            }
-            // ...
-        }) { (error) in
-            print(error.localizedDescription)
-        }
+        let favMovie = ["id": photo.photoId, "photoTitle": photo.title , "numOfViews": photo.views , "imageUrl": photo.photoLink!.absoluteString , "dateTaken": photo.dateTaken]
+        self.ref.child("Users").child(self.userID!).child("FavoritePhotos").child(photo.photoId).setValue(favMovie)
         favoritePhotos.append(photo)
+        
+        guard let delegate = self.delegate else {
+            return
+        }
+        delegate.updateList(updateList: favoritePhotos)
     }
     
+    /// A helper function to check if given photo exist in the list of favorite photos
+    /// - Parameter photo: the photo to search  for
+    /// - Returns: true if the photo exist in the list, false if it doesn't
     func checkIfPhotoExist(photo: SavedPhoto) -> Bool {
         if favoritePhotos.firstIndex(of: photo) != nil {
             return true
@@ -93,3 +101,8 @@ class UserPhotoStore {
 extension Notification.Name {
     static let photosStoreLoadedPhotos = Notification.Name(rawValue: "photosStoreLoadedPhotos")
 }
+
+protocol UserPhotoStoreDelegate {
+    func updateList(updateList: [SavedPhoto])
+}
+

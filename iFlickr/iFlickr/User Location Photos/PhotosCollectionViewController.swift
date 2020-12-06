@@ -7,21 +7,30 @@
 
 import UIKit
 import CoreLocation
+import FirebaseAuth
 
 class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate {
     
+    // Declaring the collection view outlet to display photos
     @IBOutlet var photosCollectionView: UICollectionView!
+    
+    let userID = Auth.auth().currentUser?.uid
     var store: PhotoStore!
     let photoDataSource = PhotoDataSource()
     var locationManager: PhotoLocationService!
+    var userPhotoStore: UserPhotoStore!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        //userPhotoStore = UserPhotoStore(userId: userID)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tabBar = tabBarController as! MainTabViewController
+        self.userPhotoStore = tabBar.userPhotoStore
+        //instantiating the class holding the location manager
         self.locationManager = PhotoLocationService()
         locationManager.delegate = self
         
@@ -30,6 +39,10 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
         
     }
     
+    /// A function that makes a fetches photos for current location using the store var
+    /// - Parameters:
+    ///   - lat: latitude of the user location
+    ///   - lon: logntitue of the user location
     func fetchPhotosInUserLocation(lat: Double, lon: Double) {
         
         self.store.fetchPhotosForLocation(lat:lat , lon: lon) {
@@ -92,13 +105,15 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
             layout.scrollDirection = .vertical
         }
         
-//        layout.minimumInteritemSpacing = 0
-//        layout.minimumLineSpacing = 0
-        //        layout.scrollDirection = .horizontal
         
         photosCollectionView.collectionViewLayout = layout
     }
     
+    /// A helper function to calculate the distance between a photo and current location of the user
+    /// - Parameters:
+    ///   - currentLocation: user location
+    ///   - photoLocation: location where the photo was taken
+    /// - Returns: distance between the two locations
     func getDistanceFromPhotoLocation(currentLocation: CLLocation, photoLocation: CLLocation) -> Int{
         
         let distanceInMeters = currentLocation.distance(from: photoLocation)/1000
@@ -114,23 +129,14 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
                 let photo = photoDataSource.photos[selectedIndexPath.row]
                 let destinationVC = segue.destination as! PhotoDetailViewController
                 destinationVC.photo = photo
-                let userVC = self.tabBarController?.viewControllers![0] as! UserViewController
-                destinationVC.userPhotoStore = userVC.userPhotoStore
+                let tabBar = tabBarController as! MainTabViewController
+                destinationVC.userPhotoStore = self.userPhotoStore
+                destinationVC.tabBar = tabBar
             }
         default:
             preconditionFailure("Unexpected segue identifier.")
         }
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 

@@ -8,52 +8,57 @@
 import UIKit
 import MapKit
 import CoreLocation
+import FirebaseAuth
 
-class MapViewController: UIViewController, CLLocationManagerDelegate {
+class MapViewController: UIViewController {
     
-    let locationManager = CLLocationManager()
-    var annotitionsCounter = 0
-    
+    //Declaring map view outlet
     @IBOutlet var mapView: MKMapView!
+    
+    //Declaring variables for the VC
+    let userID = Auth.auth().currentUser?.uid
+    var currentLocation: CLLocation!   // current location of the user
+    var annotitionsCounter = 0  // annotation counter to keep track of how many on the map
+    var locationManager: PhotoLocationService! //location service class to current location
+    var userPhotoStore: UserPhotoStore!
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        let tabBar = tabBarController as! MainTabViewController
+        self.userPhotoStore = tabBar.userPhotoStore
         
+        getUserLocation()
         showInformationAlert()
         setUpMapView()
-        getUserLocation()
-        //markPhotosOnMap()
     }
     
+    /// A function used to get the user location when the view is loaded
     func getUserLocation() {
-        // setting up the location
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.startUpdatingLocation()
-        
+     
+        self.locationManager = PhotoLocationService()
         locationManager.delegate = self
         
         //shows a blue point on user location
         mapView.showsUserLocation = true
         
-        // zoom in the user exact location 
+        // zoom in the user exact location -> (left commented, just a design choice)
         //mapView.setUserTrackingMode(.follow, animated: true)
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            var locationLatLan = "Lat : \(location.coordinate.latitude) \nLng : \(location.coordinate.longitude)"
-            print(locationLatLan)
-        }
-    }
     
+    /// A functiom hat adds a segment controller to the map with diffrent view
     func setUpMapView() {
+        
         let standardString = NSLocalizedString("Standard", comment: "Standard map view")
         let hybridString = NSLocalizedString("Hybrid", comment: "Hybrid map view")
-        let satelliteString
-            = NSLocalizedString("Satellite", comment: "Satellite map view")
+        let satelliteString = NSLocalizedString("Satellite", comment: "Satellite map view")
+        
         let segmentedControl
             = UISegmentedControl(items: [standardString, hybridString, satelliteString])
         segmentedControl.backgroundColor = UIColor.systemBackground
@@ -76,10 +81,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    /// A  function that handles the tap on the map, and gets the location where the user tapped
+    /// - Parameter sender: tap gesture recognizer
     @IBAction func triggerTouchAction(_ sender: UITapGestureRecognizer){
         if sender.state == .ended{
             let locationInView = sender.location(in: mapView)
             let tappedCoordinate = mapView.convert(locationInView, toCoordinateFrom: mapView)
+            
+            //Making sure only one annotation is placed on the map
             if annotitionsCounter == 1 {
                 mapView.removeAnnotations(mapView.annotations)
                 annotitionsCounter = 0
@@ -93,6 +102,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    /// A function that adds annotion on map for the sent cordinates where the user tapped
+    /// - Parameter coordinate: location of where the user tapped
     func addAnnotation(coordinate:CLLocationCoordinate2D){
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
@@ -100,28 +111,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         showPinnedLocationPhotos(coordinate: coordinate)
     }
     
+    /// A function that pops the VC to show the list of photos for the pinned location
+    /// - Parameter coordinate: the location where the user tapped -> location of the annoation
     func showPinnedLocationPhotos(coordinate: CLLocationCoordinate2D)
     {
-        let userVC = self.tabBarController?.viewControllers![0] as! UserViewController
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let destVC = storyboard.instantiateViewController(withIdentifier: "PinnedController") as! PinnedLocationViewController
         
+        let theTabBar = tabBarController as! MainTabViewController
         destVC.modalPresentationStyle = UIModalPresentationStyle.popover
         destVC.modalTransitionStyle = UIModalTransitionStyle.coverVertical
         destVC.cordinates = coordinate
-        destVC.userPhotoStore = userVC.userPhotoStore
+        destVC.userPhotoStore = self.userPhotoStore
+        destVC.tabBar = theTabBar
         self.present(destVC, animated: true, completion: nil)
     }
     
-    func markPhotosOnMap() {
-        mapView.delegate = self
-        let appleParkAnnotation = MKPointAnnotation()
-        appleParkAnnotation.title = "Apple Park"
-        appleParkAnnotation.coordinate = CLLocationCoordinate2DMake(26.399250, 49.984360)
-        
-        mapView.addAnnotation(appleParkAnnotation)
-    }
     
+    /// A function that handles the map view type change
+    /// - Parameter segControl: segment controller
     @objc func mapTypeChanged(_ segControl: UISegmentedControl) {
         switch segControl.selectedSegmentIndex {
         case 0:
@@ -135,68 +143,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    /// A function that shows the user an alert to tell more about how to use the map vc
     func showInformationAlert() {
-        let alert = UIAlertController(title: "Explore World Photos!", message: "Once you tap on any location on the map, we will show you list of photos.", preferredStyle: .alert)
-
+        let alert = UIAlertController(title: "Explore The World!", message: "Once you tap on any location on the map, we will show you list of photos for it.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok, Got it!", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
-
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 
-extension MapViewController: MKMapViewDelegate  {
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-        
-        let imageUrlString = "http://cdn.playbuzz.com/cdn/38402fff-32a3-4e78-a532-41f3a54d04b9/cc513a85-8765-48a5-8481-98740cc6ccdc.jpg"
-        
-        let imageUrl = URL(string: imageUrlString)!
-        
-        let image = try? UIImage(withContentsOfUrl: imageUrl)
-        
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "AnnotationView")
-        
-        if annotationView == nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "AnnotationView")
-        }
-        
-        if let title = annotation.title, title == "Apple Park" {
-            annotationView?.image = image
-            print("------")
-        } else if let title = annotation.title, title == "Ortega Park" {
-            annotationView?.image = UIImage(named: "tree")
-        } else if annotation === mapView.userLocation {
-            annotationView?.image = UIImage(named: "car")
-        }
-        
-        annotationView?.canShowCallout = true
-        
-        return annotationView
-        
+extension MapViewController: LocationServiceDelegate  {
+    func tracingLocation(currentLocation: CLLocation) {
+        self.currentLocation = currentLocation
     }
-    
 }
-
-//class CustomPointAnnotation: MKPointAnnotation {
-//    var imageName: String!
-//}
-
-extension UIImage {
-    
-    convenience init?(withContentsOfUrl url: URL) throws {
-        let imageData = try Data(contentsOf: url)
-        
-        self.init(data: imageData)
-    }
-    
-}
-

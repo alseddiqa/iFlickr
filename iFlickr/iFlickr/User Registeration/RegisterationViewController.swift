@@ -12,31 +12,31 @@ import FirebaseAuth
 
 class RegisterationViewController: UIViewController {
 
+    //Declaring outlets vars for the registeration view
     @IBOutlet var nameField: UITextField!
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var signUpButton: UIButton!
     
+    //Declaring DB refrence, and delegate for the login
     var delegate: SignUpDelegate!
     var ref: DatabaseReference!
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         self.delegate.updateView()
-
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
         setUpTextFields()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
+    /// A helper function to to style out the  textfields of the view
     func setUpTextFields() {
         
         nameField.layer.cornerRadius = 15.0
@@ -59,9 +59,12 @@ class RegisterationViewController: UIViewController {
         signUpButton.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         signUpButton.layer.masksToBounds = true
     }
-
+    
+    /// The sign up function the triggers after the user taps 'sign up' button
+    /// - Parameter sender: sign up button
     @IBAction func handleSignUp(_ sender: UIButton) {
         
+        //check if fields are empty, if yes will not register
         if validateTextFields() == false {
             return
         }
@@ -85,6 +88,8 @@ class RegisterationViewController: UIViewController {
     }
     
     
+    /// A helper function to check if fields were empty, (i plan to further improve this check to make sure fields have a min length text)
+    /// - Returns: true if fields are filled, false if one of the firelds is empty
     func validateTextFields() -> Bool{
         
         let name = nameField.text!
@@ -131,14 +136,5 @@ class RegisterationViewController: UIViewController {
         
         return true
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -8,13 +8,15 @@
 import UIKit
 import FirebaseAuth
 
+/// Settings view contrller, could add more option later, but now it's just for loggin out
 class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
+    
+    /// Perform logout from the app when the user taps on logout
+    /// - Parameter sender: log out button
     @IBAction func handleLogOut(_ sender: UIButton) {
         
         do { try Auth.auth().signOut() }
@@ -24,16 +26,5 @@ class SettingsViewController: UIViewController {
         let loginNavController = storyboard.instantiateViewController(identifier: "LoginController")
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginNavController)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
