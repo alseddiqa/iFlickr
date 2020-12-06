@@ -257,6 +257,14 @@
 			path = "User Location Photos";
 			sourceTree = "<group>";
 		};
+		B8A74584257D87D300B4388C /* Main Tab Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B8A7456B257D75A900B4388C /* MainTabViewController.swift */,
+			);
+			path = "Main Tab Controller";
+			sourceTree = "<group>";
+		};
 		B8B52CF12573C5E600DBF3E2 = {
 			isa = PBXGroup;
 			children = (
@@ -294,8 +302,8 @@
 				B8A74555257C058000B4388C /* Flickr API */,
 				B8A74551257C055C00B4388C /* Photos Model */,
 				B8A74563257C0FC500B4388C /* Location Service */,
+				B8A74584257D87D300B4388C /* Main Tab Controller */,
 				B8B52D062573C5E800DBF3E2 /* Assets.xcassets */,
-				B8A7456B257D75A900B4388C /* MainTabViewController.swift */,
 				B8B52D082573C5E800DBF3E2 /* LaunchScreen.storyboard */,
 				B8B52D0B2573C5E800DBF3E2 /* Info.plist */,
 				B83C974325792C1D00B7C4E7 /* GoogleService-Info.plist */,
