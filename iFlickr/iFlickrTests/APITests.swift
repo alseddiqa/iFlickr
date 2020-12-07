@@ -11,6 +11,7 @@ import XCTest
 class APITests: XCTestCase {
 
     //Test to make sure photos only with URL will be in the array of the result after making a fetch
+    //Check if API does filtering correctly
     func testPhotosWithURL() {
        let store = PhotoStore()
        var photosArray = [Photo]()

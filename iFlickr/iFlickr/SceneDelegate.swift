@@ -28,8 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window?.rootViewController = mainTabBarController
         } else {
             // if user isn't logged in
-            // instantiate the navigation controller and set it as root view controller
-            // using the storyboard identifier we set earlier
+            // instantiate the login controller and set it as root view controller
             let loginNavController = storyboard.instantiateViewController(identifier: "LoginController")
             window?.rootViewController = loginNavController
         }

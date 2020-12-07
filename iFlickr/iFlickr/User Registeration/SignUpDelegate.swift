@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Sign up delegate declared to allow view updates 
 protocol SignUpDelegate {
     func updateView()
 }
