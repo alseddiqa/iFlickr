@@ -319,9 +319,9 @@
 				B8B52D142573C5E800DBF3E2 /* iFlickrTests.swift */,
 				B8B52D162573C5E800DBF3E2 /* Info.plist */,
 				B85E3B5B257A569A000F2301 /* APITests.swift */,
+				B836E69C257E35C900F6692B /* ImageStoreTests.swift */,
 				B85E3B68257A900D000F2301 /* UserPhotoStoreTests.swift */,
 				B85E3B6D257BF2A5000F2301 /* PhotoStoreTests.swift */,
-				B836E69C257E35C900F6692B /* ImageStoreTests.swift */,
 			);
 			path = iFlickrTests;
 			sourceTree = "<group>";

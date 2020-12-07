@@ -13,7 +13,11 @@ protocol LocationServiceDelegate {
 }
 
 class PhotoLocationService: NSObject, CLLocationManagerDelegate {
+    
+    //instance of location manager
     private let locationManager = CLLocationManager()
+    
+    //Declaring lat and long for the current location that will be set when location of the user is determined
     private(set) var latitude = 0.0
     private(set) var longitude = 0.0
     

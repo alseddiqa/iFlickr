@@ -14,12 +14,9 @@ enum PhotoError: Error {
 
 class PhotoStore {
     
+    //Declare the image store for caching
     let imageStore = ImageStore()
-    
-    private let session: URLSession = {
-        let config = URLSessionConfiguration.default
-        return URLSession(configuration: config)
-    }()
+    let session = URLSession(configuration: URLSessionConfiguration.default)
     
     func fetchPhotosForLocation(lat: Double, lon: Double, completion: @escaping (Result<[Photo], Error>) -> Void) {
         let flickerAPI = FlickrAPI(lat: lat, lon: lon)
@@ -35,7 +32,7 @@ class PhotoStore {
         task.resume()
     }
     
-    private func processPhotosRequest(data: Data?,
+    func processPhotosRequest(data: Data?,
                                       error: Error?) -> Result<[Photo], Error> {
         guard let jsonData = data else {
             return .failure(error!)
@@ -75,7 +72,12 @@ class PhotoStore {
         task.resume()
     }
     
-    private func processImageRequest(data: Data?,
+    /// A function to help create an image from URL
+    /// - Parameters:
+    ///   - data: the data to create an image from
+    ///   - error: error creating a ui image
+    /// - Returns: a UImage from
+    func processImageRequest(data: Data?,
                                      error: Error?) -> Result<UIImage, Error> {
         guard
             let imageData = data,
