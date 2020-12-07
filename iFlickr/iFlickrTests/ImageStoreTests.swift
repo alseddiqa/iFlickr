@@ -10,6 +10,7 @@ import XCTest
 
 class ImageStoreTests: XCTestCase {
 
+    //Test image caching
     func testImageCaching() {
         let imageStore = ImageStore()
         let image = UIImage(systemName: "star.fill")
@@ -18,6 +19,7 @@ class ImageStoreTests: XCTestCase {
         XCTAssertNotNil(check)
     }
     
+    //Test image deletion
     func testImageDeletionFromCache() {
         let imageStore = ImageStore()
         let image = UIImage(systemName: "star.fill")
@@ -27,5 +29,15 @@ class ImageStoreTests: XCTestCase {
         imageStore.deleteImageFromCache(forKey: "123456789")
         let nilImage = imageStore.image(forKey: "123456789")
         XCTAssertNil(nilImage)
+    }
+    
+    //Test image retrieved url -> (path)
+    func testImageUrl(){
+        let imageStore = ImageStore()
+        let image = UIImage(systemName: "star.fill")
+        imageStore.setImage(image!, forKey: "123456789")
+        let url = imageStore.imageURL(forKey: "123456789")
+        print(url.absoluteString)
+        XCTAssertNotNil(url)
     }
 }
