@@ -35,11 +35,4 @@ class UserPhotoStoreTests: XCTestCase {
         XCTAssertTrue(exist)
     }
 
-//    func testPerformanceExample() throws {
-//        // This is an example of a performance test case.
-//        self.measure {
-//            userPhotoStore.loadPhotos(forId: )
-//        }
-//    }
-
 }

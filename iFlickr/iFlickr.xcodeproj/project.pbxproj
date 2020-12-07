@@ -10,6 +10,7 @@
 		82EFA166A3DC1416387EB8A0 /* Pods_iFlickr_iFlickrUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3CDA82D01BCD19F291F4D8 /* Pods_iFlickr_iFlickrUITests.framework */; };
 		8EE2870B3026012984C6D047 /* Pods_iFlickr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D533D847CDDC62705B37A8 /* Pods_iFlickr.framework */; };
 		A0E30F9687C4D51DEB235522 /* Pods_iFlickrTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C6CB26B19F3CCEAD04DF48 /* Pods_iFlickrTests.framework */; };
+		B836E69D257E35C900F6692B /* ImageStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B836E69C257E35C900F6692B /* ImageStoreTests.swift */; };
 		B83C973B25792AF300B7C4E7 /* RegisterationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83C973A25792AF300B7C4E7 /* RegisterationViewController.swift */; };
 		B83C974425792C1D00B7C4E7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B83C974325792C1D00B7C4E7 /* GoogleService-Info.plist */; };
 		B83C975D25794F3200B7C4E7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83C975C25794F3200B7C4E7 /* LoginViewController.swift */; };
@@ -73,6 +74,7 @@
 		3F3CDA82D01BCD19F291F4D8 /* Pods_iFlickr_iFlickrUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iFlickr_iFlickrUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89CF2BA65890CAE32C7883BB /* Pods-iFlickrTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iFlickrTests.release.xcconfig"; path = "Target Support Files/Pods-iFlickrTests/Pods-iFlickrTests.release.xcconfig"; sourceTree = "<group>"; };
 		8ED35F12FF401148159184DC /* Pods-iFlickr-iFlickrUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iFlickr-iFlickrUITests.release.xcconfig"; path = "Target Support Files/Pods-iFlickr-iFlickrUITests/Pods-iFlickr-iFlickrUITests.release.xcconfig"; sourceTree = "<group>"; };
+		B836E69C257E35C900F6692B /* ImageStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStoreTests.swift; sourceTree = "<group>"; };
 		B83C973A25792AF300B7C4E7 /* RegisterationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationViewController.swift; sourceTree = "<group>"; };
 		B83C974325792C1D00B7C4E7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B83C975C25794F3200B7C4E7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				B8B52D142573C5E800DBF3E2 /* iFlickrTests.swift */,
 				B8B52D162573C5E800DBF3E2 /* Info.plist */,
 				B85E3B5B257A569A000F2301 /* APITests.swift */,
+				B836E69C257E35C900F6692B /* ImageStoreTests.swift */,
 				B85E3B68257A900D000F2301 /* UserPhotoStoreTests.swift */,
 				B85E3B6D257BF2A5000F2301 /* PhotoStoreTests.swift */,
 			);
@@ -607,6 +610,7 @@
 			files = (
 				B85E3B69257A900D000F2301 /* UserPhotoStoreTests.swift in Sources */,
 				B85E3B5C257A569A000F2301 /* APITests.swift in Sources */,
+				B836E69D257E35C900F6692B /* ImageStoreTests.swift in Sources */,
 				B85E3B6E257BF2A5000F2301 /* PhotoStoreTests.swift in Sources */,
 				B8B52D152573C5E800DBF3E2 /* iFlickrTests.swift in Sources */,
 			);

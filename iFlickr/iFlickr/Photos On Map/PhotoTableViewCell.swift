@@ -9,6 +9,7 @@ import UIKit
 
 class PhotoTableViewCell: UITableViewCell {
 
+    // Declaring the outlets for the table cell
     @IBOutlet var photoimageView: UIImageView!
     @IBOutlet var photoTitleLabel: UILabel!
     @IBOutlet var spinner: UIActivityIndicatorView!

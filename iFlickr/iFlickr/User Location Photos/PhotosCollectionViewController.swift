@@ -49,7 +49,6 @@ class PhotosCollectionViewController: UIViewController, UICollectionViewDelegate
             (photosResult) in
             switch photosResult {
             case let .success(photos):
-                print("Found \(photos.count) photos.")
                 self.photoDataSource.photos = photos
             case let .failure(error):
                 print("Error fetching photos: \(error)")

@@ -10,6 +10,33 @@ import XCTest
 
 class APITests: XCTestCase {
 
+    //Test to make sure photos only with URL will be in the array of the result after making a fetch
+    //Check if API does filtering correctly
+    func testPhotosWithURL() {
+       let store = PhotoStore()
+       var photosArray = [Photo]()
+
+        let completionExpectation = expectation(description: "Execute completion closure.")
+       store.fetchPhotosForLocation(lat: 26.4207, lon: 50.0888) {
+        (photosResult) in
+        switch photosResult {
+        case let .success(photos):
+            photosArray = photos
+        case let .failure(error):
+            print("Error fetching photos: \(error)")
+            photosArray.removeAll()
+        }
+
+        for photo in photosArray {
+            XCTAssertNotNil(photo.remoteURL)
+        }
+        completionExpectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 10.0, handler: nil)
+
+    }
+    
     
     /// A test to verify that Flickr API get photos that were geo tagged, -> have latitiude and lontitude
     func testPhotosWithGeo() {
@@ -37,13 +64,5 @@ class APITests: XCTestCase {
 
     }
     
-  
-
-//    func testPerformanceExample() throws {
-//        // This is an example of a performance test case.
-//        self.measure {
-//            // Put the code you want to measure the time of here.
-//        }
-//    }
-
+    
 }

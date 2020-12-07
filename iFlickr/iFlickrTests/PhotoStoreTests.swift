@@ -10,7 +10,7 @@ import XCTest
 
 class PhotoStoreTests: XCTestCase {
     
-    //test performance of the fetch
+    //test performance of the fetch (Note from Mikey: in fact this could be considered as network test)
     func testPerformance() {
        let store = PhotoStore()
        var photosArray = [Photo]()

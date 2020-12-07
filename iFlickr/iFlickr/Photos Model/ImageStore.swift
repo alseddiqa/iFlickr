@@ -56,6 +56,9 @@ class ImageStore {
         }
     }
     
+    /// A helper function to get the url of the image in the cache
+    /// - Parameter key: the key of the image 
+    /// - Returns: the url where the image stored in the cache
     func imageURL(forKey key: String) -> URL {
         let documentDirectories = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = documentDirectories.first!
